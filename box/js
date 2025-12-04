@@ -1,0 +1,349 @@
+document.addEventListener("DOMContentLoaded", function () {
+  const composition = document.getElementById("composition");
+  const boxSizeSlider = document.getElementById("boxSize");
+  const boxSizeValue = document.getElementById("boxSizeValue");
+  const borderSizeSlider = document.getElementById("borderSize");
+  const borderSizeValue = document.getElementById("borderSizeValue");
+  const colorOptions = document.querySelectorAll(".color-option");
+  const randomizeBtn = document.getElementById("randomizeBtn");
+  const resetBtn = document.getElementById("resetBtn");
+  const mondrianBtn = document.getElementById("mondrianBtn");
+
+  // Box data - positions, sizes and colors
+  const defaultBoxesData = [
+    {
+      id: 1,
+      class: "box box-1 box-large",
+      top: 20,
+      left: 20,
+      color: "#e74c3c",
+      size: "large",
+      width: 250,
+      height: 200,
+    },
+    {
+      id: 2,
+      class: "box box-2 box-medium",
+      top: 20,
+      right: 20,
+      color: "#3498db",
+      size: "medium",
+      width: 180,
+      height: 150,
+    },
+    {
+      id: 3,
+      class: "box box-3 box-small",
+      bottom: 20,
+      left: 20,
+      color: "#f1c40f",
+      size: "small",
+      width: 120,
+      height: 100,
+    },
+    {
+      id: 4,
+      class: "box box-4 box-medium",
+      bottom: 20,
+      right: 20,
+      color: "#2ecc71",
+      size: "medium",
+      width: 180,
+      height: 150,
+    },
+    {
+      id: 5,
+      class: "box box-5 box-small",
+      top: "50%",
+      left: "50%",
+      color: "#ecf0f1",
+      size: "small",
+      width: 120,
+      height: 100,
+    },
+    {
+      id: 6,
+      class: "box box-6",
+      top: 100,
+      left: 300,
+      color: "#9b59b6",
+      size: "custom",
+      width: 150,
+      height: 220,
+    },
+    {
+      id: 7,
+      class: "box box-7",
+      top: 150,
+      right: 300,
+      color: "#1abc9c",
+      size: "custom",
+      width: 200,
+      height: 120,
+    },
+  ];
+
+  let boxesData = JSON.parse(JSON.stringify(defaultBoxesData)); // Deep copy
+  let selectedBoxId = 1;
+  let boxes = [];
+
+  // Create boxes
+  function createBoxes() {
+    composition.innerHTML = "";
+    boxes = [];
+
+    boxesData.forEach((boxData) => {
+      const box = document.createElement("div");
+      box.className = boxData.class;
+      box.dataset.id = boxData.id;
+      box.title = `Box ${boxData.id} - Click to select`;
+
+      // Set position
+      if (boxData.top)
+        box.style.top =
+          typeof boxData.top === "string" ? boxData.top : `${boxData.top}px`;
+      if (boxData.left)
+        box.style.left =
+          typeof boxData.left === "string" ? boxData.left : `${boxData.left}px`;
+      if (boxData.right)
+        box.style.right =
+          typeof boxData.right === "string"
+            ? boxData.right
+            : `${boxData.right}px`;
+      if (boxData.bottom)
+        box.style.bottom =
+          typeof boxData.bottom === "string"
+            ? boxData.bottom
+            : `${boxData.bottom}px`;
+
+      // Set size
+      box.style.width = `${boxData.width}px`;
+      box.style.height = `${boxData.height}px`;
+
+      // Set color
+      box.style.backgroundColor = boxData.color;
+
+      // Add event listener for box selection
+      box.addEventListener("click", function (e) {
+        e.stopPropagation();
+        selectBox(boxData.id);
+      });
+
+      composition.appendChild(box);
+      boxes.push({ element: box, data: boxData });
+    });
+
+    // Select first box by default
+    selectBox(1);
+  }
+
+  // Select a box
+  function selectBox(boxId) {
+    selectedBoxId = boxId;
+
+    // Remove selected style from all boxes
+    boxes.forEach((box) => {
+      box.element.style.outline = "none";
+      box.element.style.boxShadow = "none";
+    });
+
+    // Add selected style to the chosen box
+    const selectedBox = boxes.find((b) => b.data.id === boxId);
+    if (selectedBox) {
+      selectedBox.element.style.outline = "3px dashed #2c3e50";
+      selectedBox.element.style.boxShadow = "0 0 10px rgba(44, 62, 80, 0.3)";
+
+      // Activate the color option that matches the box color
+      colorOptions.forEach((option) => {
+        option.classList.remove("active");
+        if (option.dataset.color === selectedBox.data.color) {
+          option.classList.add("active");
+        }
+      });
+    }
+  }
+
+  // Update box sizes
+  function updateBoxSizes() {
+    const sizeValue = parseInt(boxSizeSlider.value);
+    let sizeText = "";
+
+    boxes.forEach((box) => {
+      const boxElement = box.element;
+      const originalWidth = box.data.width;
+      const originalHeight = box.data.height;
+
+      if (sizeValue === 1) {
+        // Small
+        boxElement.style.width = `${originalWidth * 0.7}px`;
+        boxElement.style.height = `${originalHeight * 0.7}px`;
+        sizeText = "Small";
+      } else if (sizeValue === 2) {
+        // Medium
+        boxElement.style.width = `${originalWidth}px`;
+        boxElement.style.height = `${originalHeight}px`;
+        sizeText = "Medium";
+      } else if (sizeValue === 3) {
+        // Large
+        boxElement.style.width = `${originalWidth * 1.3}px`;
+        boxElement.style.height = `${originalHeight * 1.3}px`;
+        sizeText = "Large";
+      }
+    });
+
+    boxSizeValue.textContent = sizeText;
+  }
+
+  // Update border thickness
+  function updateBorderSize() {
+    const borderSize = borderSizeSlider.value;
+    boxes.forEach((box) => {
+      box.element.style.borderWidth = `${borderSize}px`;
+    });
+    borderSizeValue.textContent = `${borderSize}px`;
+  }
+
+  // Change color of selected box
+  function changeBoxColor(color) {
+    const selectedBox = boxes.find((b) => b.data.id === selectedBoxId);
+    if (selectedBox) {
+      selectedBox.element.style.backgroundColor = color;
+      selectedBox.data.color = color;
+    }
+  }
+
+  // Randomize composition
+  function randomizeComposition() {
+    boxes.forEach((box) => {
+      // Random color
+      const colors = [
+        "#e74c3c",
+        "#3498db",
+        "#f1c40f",
+        "#2ecc71",
+        "#9b59b6",
+        "#1abc9c",
+        "#ecf0f1",
+        "#2c3e50",
+      ];
+      const randomColor = colors[Math.floor(Math.random() * colors.length)];
+      box.element.style.backgroundColor = randomColor;
+      box.data.color = randomColor;
+
+      // Random position (only for boxes that aren't centered)
+      if (box.data.id !== 5) {
+        const maxTop = 350;
+        const maxLeft = 700;
+
+        // Clear all position properties first
+        box.element.style.top = "";
+        box.element.style.left = "";
+        box.element.style.right = "";
+        box.element.style.bottom = "";
+
+        // Set random position based on original positioning type
+        if (box.data.id === 1 || box.data.id === 3) {
+          box.element.style.left = `${Math.floor(Math.random() * maxLeft)}px`;
+        } else if (box.data.id === 2 || box.data.id === 4) {
+          box.element.style.right = `${Math.floor(Math.random() * maxLeft)}px`;
+        }
+
+        if (box.data.id === 1 || box.data.id === 2) {
+          box.element.style.top = `${Math.floor(Math.random() * maxTop)}px`;
+        } else if (box.data.id === 3 || box.data.id === 4) {
+          box.element.style.bottom = `${Math.floor(Math.random() * maxTop)}px`;
+        }
+
+        // For box 6 and 7
+        if (box.data.id === 6) {
+          box.element.style.left = `${Math.floor(Math.random() * maxLeft)}px`;
+          box.element.style.top = `${Math.floor(Math.random() * maxTop)}px`;
+        } else if (box.data.id === 7) {
+          box.element.style.right = `${Math.floor(Math.random() * maxLeft)}px`;
+          box.element.style.top = `${Math.floor(Math.random() * maxTop)}px`;
+        }
+      }
+    });
+
+    // Select a random box
+    selectBox(Math.floor(Math.random() * boxes.length) + 1);
+  }
+
+  // Reset to default composition
+  function resetComposition() {
+    boxesData = JSON.parse(JSON.stringify(defaultBoxesData));
+    createBoxes();
+    boxSizeSlider.value = 2;
+    borderSizeSlider.value = 3;
+    updateBoxSizes();
+    updateBorderSize();
+  }
+
+  // Apply classic Mondrian colors (primary colors + black/white)
+  function applyMondrianStyle() {
+    const mondrianColors = [
+      "#e74c3c",
+      "#3498db",
+      "#f1c40f",
+      "#ffffff",
+      "#000000",
+    ];
+
+    boxes.forEach((box) => {
+      const randomColor =
+        mondrianColors[Math.floor(Math.random() * mondrianColors.length)];
+      box.element.style.backgroundColor = randomColor;
+      box.data.color = randomColor;
+    });
+
+    // Ensure we have the characteristic Mondrian look
+    boxes[0].element.style.backgroundColor = "#e74c3c"; // Red
+    boxes[1].element.style.backgroundColor = "#3498db"; // Blue
+    boxes[2].element.style.backgroundColor = "#f1c40f"; // Yellow
+    boxes[3].element.style.backgroundColor = "#ffffff"; // White
+    boxes[4].element.style.backgroundColor = "#000000"; // Black
+
+    selectBox(1);
+  }
+
+  // Event listeners
+  boxSizeSlider.addEventListener("input", updateBoxSizes);
+  borderSizeSlider.addEventListener("input", updateBorderSize);
+
+  colorOptions.forEach((option) => {
+    option.addEventListener("click", function () {
+      // Remove active class from all color options
+      colorOptions.forEach((opt) => opt.classList.remove("active"));
+
+      // Add active class to the selected option
+      this.classList.add("active");
+
+      // Change color of the selected box
+      changeBoxColor(this.dataset.color);
+    });
+  });
+
+  randomizeBtn.addEventListener("click", randomizeComposition);
+  resetBtn.addEventListener("click", resetComposition);
+  mondrianBtn.addEventListener("click", applyMondrianStyle);
+
+  // Click on composition background to deselect
+  composition.addEventListener("click", function (e) {
+    if (e.target === composition) {
+      boxes.forEach((box) => {
+        box.element.style.outline = "none";
+        box.element.style.boxShadow = "none";
+      });
+      selectedBoxId = null;
+      colorOptions.forEach((opt) => opt.classList.remove("active"));
+    }
+  });
+
+  // Initialize
+  createBoxes();
+  updateBoxSizes();
+  updateBorderSize();
+
+  // Activate color option matching the first box
+  colorOptions[0].classList.add("active");
+});
