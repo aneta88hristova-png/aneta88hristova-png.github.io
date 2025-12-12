@@ -37,7 +37,7 @@
   }
 
   .product-card {
-    flex: 1 1 calc(50% - 20px);
+    flex: 0 0 calc(50% - 1.5rem);
     max-width: 300px;
   }
 }
@@ -94,7 +94,7 @@
   }
 
   .product-card {
-    flex: 1 1 100%;
+    flex: 0 0 100%;
     max-width: 400px;
   }
 
