@@ -1,0 +1,263 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #f7f7fb;
+  color: #1f1f2b;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ===== HERO SECTION ===== */
+.hero {
+  padding: 80px 0;
+}
+
+.hero-content {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+
+.hero-text {
+  flex: 1;
+}
+
+.label {
+  display: inline-block;
+  background-color: #ffe1d8;
+  color: #ff6b4a;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.hero-text p {
+  font-size: 18px;
+  color: #6c6c80;
+  margin-bottom: 30px;
+  max-width: 500px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.btn-primary,
+.btn-outline {
+  padding: 14px 32px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 16px;
+  border: 2px solid #ff6b4a;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #ff6b4a;
+  color: white;
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: #ff6b4a;
+}
+
+.btn-primary:hover {
+  background-color: #ff5a36;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 107, 74, 0.3);
+}
+
+.btn-outline:hover {
+  background-color: #ffe1d8;
+  transform: translateY(-3px);
+}
+
+.hero-image {
+  flex: 1;
+}
+
+.image-placeholder {
+  width: 100%;
+  height: 400px;
+  background-color: #ffe1d8;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ff6b4a;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* ===== BENEFITS SECTION ===== */
+.benefits {
+  padding: 80px 0;
+  background-color: #f7f7fb;
+}
+
+h2 {
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 50px;
+}
+
+.benefits-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+.benefit-card {
+  flex: 1 1 calc(33.333% - 20px);
+  min-width: 280px;
+  background-color: white;
+  padding: 40px 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  transition: all 0.3s ease;
+  animation: slideUp 0.5s ease-out;
+}
+
+.benefit-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.benefit-card h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #1f1f2b;
+}
+
+.benefit-card p {
+  color: #6c6c80;
+  line-height: 1.7;
+}
+
+/* ===== PRODUCTS SECTION ===== */
+.products {
+  padding: 80px 0;
+}
+
+.products-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+}
+
+.product-card {
+  flex: 1 1 calc(25% - 19px);
+  min-width: 250px;
+  background-color: white;
+  padding: 30px 25px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  padding: 5px 15px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+}
+
+.bestseller {
+  background-color: #ff6b4a;
+}
+.new {
+  background-color: #ff6b4a;
+}
+.limited {
+  background-color: #ff6b4a;
+}
+.classic {
+  background-color: #ff6b4a;
+}
+
+.product-card h3 {
+  font-size: 20px;
+  margin: 40px 0 10px;
+  color: #1f1f2b;
+}
+
+.product-desc {
+  color: #6c6c80;
+  font-size: 14px;
+}
+
+/* ===== TESTIMONIAL SECTION ===== */
+.testimonial {
+  padding: 80px 0;
+  background-color: #f7f7fb;
+}
+
+.testimonial-card {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 50px;
+  border-radius: 15px;
+  text-align: center;
+  border-left: 5px solid #ff6b4a;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
+}
+
+.quote {
+  font-size: 24px;
+  font-style: italic;
+  color: #1f1f2b;
+  margin-bottom: 20px;
+  line-height: 1.8;
+}
+
+.author {
+  font-size: 18px;
+  font-weight: 600;
+  color: #6c6c80;
+}
+
+from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+to {
+  opacity: 1;
+  transform: translateY(0);
+}
