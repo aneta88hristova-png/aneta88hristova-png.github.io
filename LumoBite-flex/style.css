@@ -542,3 +542,123 @@ footer {
     height: 300px;
   }
 }
+/* ===== HAMBURGER MENU (MOBILE ONLY) ===== */
+
+/* Hide hamburger on desktop */
+.hamburger {
+  display: none;
+}
+
+/* Hide the checkbox (used to control the menu) */
+.menu-toggle {
+  display: none;
+}
+
+/* MOBILE: Show hamburger and hide regular menu */
+@media (max-width: 768px) {
+  /* Show hamburger icon */
+  .hamburger {
+    display: block;
+    width: 30px;
+    height: 25px;
+    position: relative;
+    cursor: pointer;
+    order: 2; /* Place between logo and shop button */
+  }
+
+  /* Hamburger lines (3 bars) */
+  .hamburger span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #ff6b4a;
+    border-radius: 2px;
+    position: absolute;
+    transition: all 0.3s ease;
+  }
+
+  .hamburger span:nth-child(1) {
+    top: 0;
+  }
+  .hamburger span:nth-child(2) {
+    top: 11px;
+  }
+  .hamburger span:nth-child(3) {
+    top: 22px;
+  }
+
+  /* Adjust header layout for mobile */
+  .header-container {
+    flex-wrap: wrap;
+    padding: 1rem;
+  }
+
+  .logo {
+    order: 1;
+  }
+  .shop-btn {
+    order: 3;
+  }
+
+  /* Hide the regular menu on mobile by default */
+  .nav-menu {
+    display: none;
+    width: 100%;
+    order: 4; /* Place below everything else */
+    background-color: white;
+    margin-top: 1rem;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Show menu when checkbox is checked */
+  .menu-toggle:checked ~ .nav-menu {
+    display: block;
+    animation: slideDown 0.3s ease;
+  }
+
+  /* Hamburger to X animation */
+  .menu-toggle:checked + .hamburger span:nth-child(1) {
+    transform: rotate(45deg);
+    top: 11px;
+  }
+
+  .menu-toggle:checked + .hamburger span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle:checked + .hamburger span:nth-child(3) {
+    transform: rotate(-45deg);
+    top: 11px;
+  }
+
+  /* Mobile menu styles */
+  .nav-menu ul {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .nav-menu ul li a {
+    display: block;
+    padding: 0.75rem;
+    text-align: center;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .nav-menu ul li:last-child a {
+    border-bottom: none;
+  }
+}
+
+/* Menu animation */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
