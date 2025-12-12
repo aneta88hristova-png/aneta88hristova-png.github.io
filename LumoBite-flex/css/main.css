@@ -119,65 +119,6 @@ h1 {
   color: #ff6b4a;
   font-size: 1.2rem;
   font-weight: 600;
-  animation: fadeIn 1s ease-out;
-  font-family: "Poppins", sans-serif;
-}
-
-/* ===== BENEFITS SECTION - FLEXBOX ===== */
-.benefits {
-  padding: 5rem 0;
-  background-color: #f7f7fb; /*Background */
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-h2 {
-  text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 3rem;
-  color: #1f1f2b; /*Dark text */
-  font-family: "Poppins", sans-serif;
-}
-
-.benefits-flex {
-  display: flex;
-  justify-content: space-between;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-
-.benefit-card {
-  background-color: white;
-  padding: 2.5rem 2rem;
-  border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-  text-align: center;
-  flex: 1;
-  min-width: 300px;
-  max-width: 350px;
-  border: 1px solid #f0f0f5;
-}
-
-.benefit-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-}
-
-.benefit-card h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: #1f1f2b; /*Dark text */
-  font-family: "Poppins", sans-serif;
-}
-
-.benefit-card p {
-  color: #6c6c80; /*Muted text */
-  line-height: 1.7;
   font-family: "Poppins", sans-serif;
 }
 /* ===== BENEFITS SECTION - FLEXBOX ===== */
@@ -215,7 +156,7 @@ h2 {
   transition: all 0.3s ease;
   text-align: center;
   flex: 1;
-  min-width: 300px;
+  min-width: 250px;
   max-width: 350px;
   border: 1px solid #f0f0f5;
 }
@@ -246,7 +187,7 @@ h2 {
 .products-flex {
   display: flex;
   justify-content: center;
-  gap: 1.5rem;
+  gap: 1.5 rem;
   flex-wrap: wrap;
 }
 
@@ -310,78 +251,7 @@ h2 {
   line-height: 1.6;
   font-family: "Poppins", sans-serif;
 }
-/* ===== PRODUCTS SECTION - FLEXBOX ===== */
-.products {
-  padding: 5rem 0;
-}
 
-.products-flex {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.product-card {
-  background-color: white;
-  padding: 2rem 1.5rem;
-  border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-  text-align: center;
-  position: relative;
-  flex: 1;
-  min-width: 250px;
-  max-width: 280px;
-  border: 1px solid #f0f0f5;
-}
-
-.product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-}
-
-.badge {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  padding: 0.4rem 1rem;
-  border-radius: 15px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: white;
-  font-family: "Poppins", sans-serif;
-}
-
-.badge-bestseller {
-  background-color: #ff6b4a; /*Primary */
-}
-
-.badge-new {
-  background-color: #ff6b4a;
-}
-
-.badge-limited {
-  background-color: #ff6b4a;
-}
-
-.badge-classic {
-  background-color: #ff6b4a;
-}
-
-.product-card h3 {
-  font-size: 1.3rem;
-  margin: 2.5rem 0 0.5rem;
-  color: #1f1f2b; /*Dark text */
-  font-family: "Poppins", sans-serif;
-}
-
-.product-description {
-  color: #6c6c80; /*Muted text */
-  font-size: 0.9rem;
-  line-height: 1.6;
-  font-family: "Poppins", sans-serif;
-}
 /* ===== TESTIMONIAL SECTION ===== */
 .testimonial {
   padding: 5rem 0;
@@ -397,8 +267,9 @@ h2 {
   border-radius: 15px;
   border-left: 5px solid #ff6b4a; /*Primary*/
   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
-
-  animation: fadeInUp 1s ease-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .quote {
