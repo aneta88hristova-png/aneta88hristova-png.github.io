@@ -1,0 +1,48 @@
+body {
+  font-family: Arial;
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+}
+
+.calculator {
+  border: 2px solid #4caf50;
+  padding: 25px;
+  border-radius: 10px;
+}
+
+h2 {
+  color: #193a2c;
+  text-align: center;
+}
+
+.price-info {
+  background: #d3f3d0;
+  padding: 15px;
+  border-radius: 5px;
+  margin: 20px 0;
+}
+
+input,
+button {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+button {
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.result {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
+  margin-top: 20px;
+}
