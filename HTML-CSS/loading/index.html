@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="sv">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Loading Grid</title>
+  </head>
+  <body>
+    <div class="grid">
+      <!-- Top Left  -->
+      <div class="cell tl" aria-label="Loading text with moving lines">
+        <div class="stack">
+          <div class="word">LOADING</div>
+        </div>
+        <div class="line top" aria-hidden="true"></div>
+        <div class="line bot" aria-hidden="true"></div>
+      </div>
+      <!-- Top Right -->
+      <div class="cell tr" aria-label="Loading bar with text">
+        <div class="bar" role="img" aria-hidden="true">
+          <div class="loading-text" aria-hidden="true">LOADING</div>
+        </div>
+      </div>
+      <!-- Bottom Left -->
+      <div class="cell bl" aria-label="Two dots orbiting a center dot">
+        <div class="orbit-wrap">
+          <div class="center-dot" aria-hidden="true"></div>
+          <div class="orb-left" aria-hidden="true"></div>
+          <div class="orb-right" aria-hidden="true"></div>
+        </div>
+      </div>
+      <!-- Bottom Right -->
+      <div class="cell br" aria-label="Dot walking around a square loader">
+        <div class="square-wrap">
+          <div class="square" aria-hidden="true"></div>
+          <div class="walker" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
