@@ -3,73 +3,65 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Neoplasticism - Float Version</title>
+    <title>Neoplasticism - Flexbox Version</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="outer-container clearfix">
-      <!-- Höger vertikal container -->
-      <div class="vertical-right-container">
-        <div class="top-box-right"></div>
-        <div class="bottom-box-right"></div>
-      </div>
-
-      <!-- Huvudinnehåll -->
-      <div class="main-content">
-        <!-- Övre raden -->
-        <div class="top-main clearfix">
+    <div class="outer-container">
+      <div class="main-area">
+        <div class="top-row">
           <div class="top-box-1"></div>
           <div class="top-box-2"></div>
           <div class="top-box-3"></div>
         </div>
 
-        <!-- Vänster kolumn och mittområde -->
-        <div class="clearfix">
-          <!-- Vänster kolumn -->
-          <div class="left-main">
+        <div class="body-container">
+          <div class="left-column">
             <div class="left-box-1"></div>
             <div class="left-box-2"></div>
             <div class="left-box-3"></div>
           </div>
 
-          <!-- Mittområde -->
-          <div class="middle-container">
-            <!-- Övre delen av mittområdet -->
-            <div class="middle-top clearfix">
-              <div class="middle-box-left"></div>
-              <div class="middle-box-right">
-                <div class="box-up"></div>
-                <div class="box-down-container clearfix">
-                  <div class="down-left"></div>
-                  <div class="down-right"></div>
+          <div class="middle-right-container">
+            <div class="top-middle-row">
+              <div class="middle-red"></div>
+              <div class="right-yellow-container">
+                <div class="top-yellow"></div>
+                <div class="bottom-split">
+                  <div class="green-gray"></div>
+                  <div class="cream"></div>
                 </div>
               </div>
             </div>
 
-            <!-- Nedre delen av mittområdet -->
-            <div class="middle-bottom clearfix">
-              <div class="bottom-left">
-                <div class="left-up"></div>
-                <div class="left-down"></div>
+            <div class="bottom-middle-row">
+              <div class="left-bottom-container">
+                <div class="black-box"></div>
+                <div class="light-gray-box"></div>
               </div>
 
-              <div class="bottom-right">
-                <div class="right-up clearfix">
-                  <div class="up-left">
-                    <div class="left-1"></div>
-                    <div class="left-2"></div>
-                    <div class="left-3"></div>
+              <div class="right-bottom-container">
+                <div class="complex-top">
+                  <div class="left-complex">
+                    <div class="gray-box"></div>
+                    <div class="light-green-box"></div>
+                    <div class="dark-black-box"></div>
                   </div>
-                  <div class="up-right">
-                    <div class="right-1"></div>
-                    <div class="right-2"></div>
+                  <div class="right-complex">
+                    <div class="blue-gray-box"></div>
+                    <div class="blue-box"></div>
                   </div>
                 </div>
-                <div class="right-down"></div>
+                <div class="bottom-light-gray"></div>
               </div>
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="right-column">
+        <div class="right-top-box"></div>
+        <div class="right-bottom-box"></div>
       </div>
     </div>
   </body>
