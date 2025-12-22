@@ -4,13 +4,12 @@ function calculate() {
 
   // Convert to number
   const numberOfPhones = Number(quantity);
-
-  // Fixed prices with const - RÄTT stavning här!
-  const PRICE_PER_PHONE = 119.95; // Rätt stavning
+ 
+  const PRICE_PER_PHONE = 119.95;
   const TAX_RATE = 0.05; // 5%
 
   // Calculate
-  const subtotal = PRICE_PER_PHONE * numberOfPhones; // Använder rätt variabel
+  const subtotal = PRICE_PER_PHONE * numberOfPhones;
   const taxAmount = subtotal * TAX_RATE;
   const totalPrice = subtotal + taxAmount;
 
