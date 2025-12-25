@@ -77,6 +77,135 @@
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
       }
 
+      /* QR Code Section - Specific Styles */
+      .qr-section {
+        margin: 30px 0;
+        padding: 30px;
+        border: 1px solid rgba(173, 216, 230, 0.5);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.9);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+      }
+
+      .qr-section:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(102, 179, 255, 0.15);
+        border-color: #99ccff;
+      }
+
+      .qr-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        background: linear-gradient(to bottom, #66b3ff, #b3e0ff);
+      }
+
+      .qr-title {
+        color: #2c5282;
+        margin-bottom: 15px;
+        font-weight: 500;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        font-size: 1.3rem;
+      }
+
+      .qr-title .emoji {
+        font-size: 1.5rem;
+      }
+
+      .qr-description {
+        margin-bottom: 25px;
+        color: #4a5568;
+        line-height: 1.7;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .qr-container {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        display: inline-block;
+        border: 1px solid rgba(173, 216, 230, 0.5);
+        box-shadow: 0 4px 12px rgba(70, 130, 180, 0.1);
+        margin-bottom: 15px;
+      }
+
+      .qr-image {
+        max-width: 200px;
+        height: auto;
+        display: block;
+      }
+
+      .qr-caption {
+        margin-top: 15px;
+        font-size: 14px;
+        color: #4a5568;
+        font-style: italic;
+      }
+
+      .qr-link {
+        display: inline-block;
+        background: rgba(102, 179, 255, 0.15);
+        color: #2c5282;
+        padding: 12px 24px;
+        text-decoration: none;
+        border-radius: 8px;
+        border: 1px solid rgba(102, 179, 255, 0.4);
+        transition: all 0.3s ease;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        backdrop-filter: blur(10px);
+        position: relative;
+        overflow: hidden;
+        margin-top: 10px;
+      }
+
+      .qr-link::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          rgba(179, 224, 255, 0.4),
+          rgba(102, 179, 255, 0.2)
+        );
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .qr-link:hover {
+        background: rgba(102, 179, 255, 0.25);
+        border-color: #66b3ff;
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(102, 179, 255, 0.2);
+      }
+
+      .qr-link:hover::before {
+        opacity: 1;
+      }
+
+      .qr-link::after {
+        content: "📱";
+        margin-left: 8px;
+        font-size: 14px;
+      }
+
+      /* Project Section - Standard Styles */
       .project {
         margin: 30px 0;
         padding: 25px;
@@ -223,6 +352,26 @@
         bottom: 15%;
         right: 10%;
       }
+
+      /* Responsive design */
+      @media (max-width: 600px) {
+        .container {
+          padding: 20px;
+        }
+
+        .qr-section,
+        .project {
+          padding: 20px;
+        }
+
+        .qr-container {
+          padding: 15px;
+        }
+
+        .qr-image {
+          max-width: 180px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -239,6 +388,30 @@
       </header>
 
       <main>
+        <!-- QR Code Section -->
+        <div class="qr-section">
+          <h3 class="qr-title"><span class="emoji">📱</span> Mobile Access</h3>
+          <p class="qr-description">
+            Scan this QR code with your mobile device to quickly access the
+            mobile version of this page. The QR code will direct you to a
+            mobile-optimized view of my portfolio.
+          </p>
+          <div class="qr-container">
+            <img
+              src="./QR.png"
+              alt="QR Code for Mobile Access"
+              class="qr-image"
+            />
+            <p class="qr-caption">Scan with your camera app</p>
+          </div>
+          <div>
+            <a href="./YOUR-MOBILE-FILE.html" class="qr-link">
+              Or click here for mobile version
+            </a>
+          </div>
+        </div>
+
+        <!-- Projects -->
         <div class="project">
           <h3>Travel Destination</h3>
           <p>
