@@ -1,0 +1,27 @@
+/* Large Tablets (769px to 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  :root {
+    --size: 850px;
+  }
+
+  .grid {
+    width: min(850px, 90vw);
+    height: calc(min(850px, 90vw) * 0.35);
+  }
+}
+
+/* Desktop (1025px and above) */
+@media (min-width: 1025px) {
+  .grid {
+    width: min(var(--size), 80vw);
+    height: calc(min(var(--size), 80vw) * 0.35);
+  }
+}
+
+/* Orientation adjustments for mobile */
+@media (max-height: 600px) and (orientation: landscape) {
+  .grid {
+    height: 90vh;
+    width: calc(90vh * 2.85); /* Maintain aspect ratio */
+  }
+}

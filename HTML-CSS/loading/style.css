@@ -24,21 +24,19 @@ body {
   background: linear-gradient(200deg, #224391, #26042e);
   font-family: Inter, system-ui, Segoe UI, Roboto, Arial;
   color: #d0cee0;
+  padding: 20px;
 }
 
 /* Grid container */
 .grid {
-  width: var(--size);
-  height: calc(var(--size) * 0.35);
+  width: min(var(--size), 90vw);
+  height: calc(min(var(--size), 90vw) * 0.35);
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   gap: 15px;
   background: transparent;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: relative;
 }
 
 .cell {
@@ -58,8 +56,8 @@ body {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
-/* Top-left */
 
+/* Top-left */
 .tl .line {
   position: absolute;
   width: 80%;
@@ -84,7 +82,7 @@ body {
   width: 0%;
   height: 100%;
   background: linear-gradient(90deg, var(--accent), rgba(208, 206, 224, 0.9));
-  animation: fillLine 10s linear forwards; /*Use 'infinite' instead of 'forwards' if the animation should repeat */
+  animation: fillLine 10s linear forwards;
   border-radius: 2px;
 }
 
@@ -147,7 +145,7 @@ body {
     rgba(208, 206, 224, 0.4),
     transparent
   );
-  animation: shimmer 10s ease-in-out forwards; /* Use 'infinite' instead of 'forwards' if the animation should repeat */
+  animation: shimmer 10s ease-in-out forwards;
 }
 
 @keyframes thickSlide {
@@ -167,6 +165,7 @@ body {
     transform: translateX(330%);
   }
 }
+
 /* Bottom-left */
 .bl .orbit-wrap {
   width: 140px;
@@ -198,14 +197,15 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
 .bl .orb-left {
   transform: translate(-50%, -50%) translateX(-50px);
-  animation: orbitRotateLeft 3.3s infinite; /* 3s rotation + 0.3s pause */
+  animation: orbitRotateLeft 3.3s infinite;
 }
 
 .bl .orb-right {
   transform: translate(-50%, -50%) translateX(50px);
-  animation: orbitRotateRight 3.3s infinite; /* 3s rotation + 0.3s pause */
+  animation: orbitRotateRight 3.3s infinite;
 }
 
 @keyframes orbitRotateLeft {
@@ -218,7 +218,6 @@ body {
       rotate(-540deg);
   }
   100% {
-    /* 0.3s paus */
     transform: translate(-50%, -50%) rotate(540deg) translateX(50px)
       rotate(-540deg);
   }
@@ -229,12 +228,10 @@ body {
     transform: translate(-50%, -50%) rotate(0deg) translateX(50px) rotate(0deg);
   }
   90.91% {
-    /* 3s rotation av 3.3s totalt */
     transform: translate(-50%, -50%) rotate(360deg) translateX(50px)
       rotate(-360deg);
   }
   100% {
-    /* 0.3s paus */
     transform: translate(-50%, -50%) rotate(360deg) translateX(50px)
       rotate(-360deg);
   }
@@ -260,21 +257,23 @@ body {
     0 0 15px rgba(96, 165, 250, 0.1);
   overflow: hidden;
 }
+
 .square::before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
-  width: 0%; /* Startar från vänster med 0% bredd */
-  height: 100%; /* Full höjd från början */
+  width: 0%;
+  height: 100%;
   background: linear-gradient(
     to right,
     rgba(37, 99, 235, 0.3),
     rgba(96, 165, 250, 0.6)
   );
-  animation: fillSquareHorizontal 10s linear forwards; /*Use 'infinite' instead of 'forwards' if the animation should repeat */
+  animation: fillSquareHorizontal 10s linear forwards;
   z-index: 1;
 }
+
 .br .walker {
   position: absolute;
   width: 14px;
@@ -288,6 +287,7 @@ body {
     0 0 10px rgba(96, 165, 250, 0.5);
   z-index: 2;
 }
+
 @keyframes fillSquareHorizontal {
   0% {
     width: 0%;
@@ -296,30 +296,224 @@ body {
     width: 100%;
   }
 }
+
 @keyframes walkSquare {
   0% {
-    transform: translate(-14px, -14px); /*top-left corner*/
+    transform: translate(-14px, -14px);
   }
   25% {
-    transform: translate(100px, -14px); /*top-right corner*/
+    transform: translate(100px, -14px);
   }
   50% {
-    transform: translate(100px, 100px); /*bottom-right corner*/
+    transform: translate(100px, 100px);
   }
   75% {
-    transform: translate(-14px, 100px); /*bottom-left corner*/
+    transform: translate(-14px, 100px);
   }
   100% {
-    transform: translate(-14px, -14px); /*back to top-left corner*/
+    transform: translate(-14px, -14px);
   }
 }
 
 /* Responsive design */
+/* Mobile Phones (up to 520px) */
 @media (max-width: 520px) {
   :root {
     --size: 340px;
   }
+
+  body {
+    padding: 10px;
+  }
+
   .grid {
     gap: 10px;
+    width: min(340px, 95vw);
+    height: auto;
+    aspect-ratio: 1 / 1;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 1fr);
+  }
+
+  .cell {
+    padding: 15px;
+    min-height: 80px;
+  }
+
+  .bl .orbit-wrap {
+    width: 100px;
+    height: 100px;
+  }
+
+  .bl .center-dot {
+    width: 14px;
+    height: 14px;
+  }
+
+  .bl .orb-left,
+  .bl .orb-right {
+    width: 14px;
+    height: 14px;
+  }
+
+  .bl .orb-left {
+    transform: translate(-50%, -50%) translateX(-35px);
+  }
+
+  .bl .orb-right {
+    transform: translate(-50%, -50%) translateX(35px);
+  }
+
+  .br .square-wrap {
+    width: 100px;
+    height: 100px;
+  }
+
+  .square {
+    width: 70px;
+    height: 70px;
+  }
+
+  .br .walker {
+    width: 10px;
+    height: 10px;
+    top: calc(50% - 35px);
+    left: calc(50% - 35px);
+  }
+
+  @keyframes walkSquare {
+    0% {
+      transform: translate(-10px, -10px);
+    }
+    25% {
+      transform: translate(70px, -10px);
+    }
+    50% {
+      transform: translate(70px, 70px);
+    }
+    75% {
+      transform: translate(-10px, 70px);
+    }
+    100% {
+      transform: translate(-10px, -10px);
+    }
+  }
+
+  .tr .bar {
+    height: 18px;
+    border-radius: 9px;
+  }
+
+  .tr .loading-text {
+    font-size: 0.7em;
+    letter-spacing: 2px;
+  }
+}
+
+/* Tablet (521px to 768px) */
+@media (min-width: 521px) and (max-width: 768px) {
+  :root {
+    --size: 700px;
+  }
+
+  body {
+    padding: 15px;
+  }
+
+  .grid {
+    width: min(700px, 95vw);
+    height: calc(min(700px, 95vw) * 0.35);
+    gap: 12px;
+  }
+
+  .cell {
+    padding: 18px;
+  }
+
+  .bl .orbit-wrap {
+    width: 120px;
+    height: 120px;
+  }
+
+  .bl .center-dot {
+    width: 16px;
+    height: 16px;
+  }
+
+  .bl .orb-left,
+  .bl .orb-right {
+    width: 16px;
+    height: 16px;
+  }
+
+  .bl .orb-left {
+    transform: translate(-50%, -50%) translateX(-40px);
+  }
+
+  .bl .orb-right {
+    transform: translate(-50%, -50%) translateX(40px);
+  }
+
+  .br .square-wrap {
+    width: 120px;
+    height: 120px;
+  }
+
+  .square {
+    width: 85px;
+    height: 85px;
+  }
+
+  .br .walker {
+    width: 12px;
+    height: 12px;
+    top: calc(50% - 42.5px);
+    left: calc(50% - 42.5px);
+  }
+
+  @keyframes walkSquare {
+    0% {
+      transform: translate(-12px, -12px);
+    }
+    25% {
+      transform: translate(85px, -12px);
+    }
+    50% {
+      transform: translate(85px, 85px);
+    }
+    75% {
+      transform: translate(-12px, 85px);
+    }
+    100% {
+      transform: translate(-12px, -12px);
+    }
+  }
+}
+
+/* Large Tablets (769px to 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  :root {
+    --size: 850px;
+  }
+
+  .grid {
+    width: min(850px, 90vw);
+    height: calc(min(850px, 90vw) * 0.35);
+  }
+}
+
+/* Desktop (1025px and above) */
+@media (min-width: 1025px) {
+  .grid {
+    width: min(var(--size), 80vw);
+    height: calc(min(var(--size), 80vw) * 0.35);
+  }
+}
+
+/* Orientation adjustments for mobile */
+@media (max-height: 600px) and (orientation: landscape) {
+  .grid {
+    height: 90vh;
+    width: calc(90vh * 2.85); /* Maintain aspect ratio */
   }
 }
