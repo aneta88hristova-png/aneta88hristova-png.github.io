@@ -8,7 +8,315 @@
       * {
         margin: 0;
         padding: 0;
+        <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Projects</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
         box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background: linear-gradient(
+          135deg,
+          #e6f7ff 0%,
+          #f0f8ff 50%,
+          #e1f5fe 100%
+        );
+        color: #2c3e50;
+        line-height: 1.6;
+        padding: 20px;
+        min-height: 100vh;
+        background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M10,10 L90,10 L90,90 L10,90 Z" fill="none" stroke="rgba(173, 216, 230, 0.1)" stroke-width="1"/><circle cx="50" cy="50" r="5" fill="rgba(173, 216, 230, 0.1)"/></svg>');
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.85);
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 8px 32px rgba(70, 130, 180, 0.15);
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(173, 216, 230, 0.3);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(90deg, #b3e0ff, #66b3ff, #b3e0ff);
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 40px;
+        padding-bottom: 25px;
+        border-bottom: 1px solid rgba(173, 216, 230, 0.5);
+        position: relative;
+      }
+
+      header::after {
+        content: "❄";
+        position: absolute;
+        bottom: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: white;
+        padding: 0 15px;
+        color: #66b3ff;
+        font-size: 20px;
+      }
+
+      h1 {
+        color: #2c5282;
+        margin-bottom: 10px;
+        font-weight: 300;
+        letter-spacing: 1px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Project Section - Standard Styles */
+      .project {
+        margin: 30px 0;
+        padding: 25px;
+        border: 1px solid rgba(173, 216, 230, 0.5);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.7);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .project:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(102, 179, 255, 0.15);
+        border-color: #99ccff;
+      }
+
+      .project::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        background: linear-gradient(to bottom, #66b3ff, #b3e0ff);
+      }
+
+      .project h3 {
+        color: #2c5282;
+        margin-bottom: 12px;
+        font-weight: 500;
+        position: relative;
+        padding-left: 15px;
+      }
+
+      .project h3::before {
+        content: "❄";
+        position: absolute;
+        left: -5px;
+        color: #66b3ff;
+      }
+
+      .project p {
+        margin-bottom: 20px;
+        color: #4a5568;
+        line-height: 1.7;
+      }
+
+      .project a {
+        display: inline-block;
+        background: rgba(102, 179, 255, 0.15);
+        color: #2c5282;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 8px;
+        border: 1px solid rgba(102, 179, 255, 0.4);
+        transition: all 0.3s ease;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        backdrop-filter: blur(10px);
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      .project a::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          rgba(179, 224, 255, 0.4),
+          rgba(102, 179, 255, 0.2)
+        );
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .project a:hover {
+        background: rgba(102, 179, 255, 0.25);
+        border-color: #66b3ff;
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(102, 179, 255, 0.2);
+      }
+
+      .project a:hover::before {
+        opacity: 1;
+      }
+
+      .project a::after {
+        content: "↗";
+        margin-left: 8px;
+        font-size: 14px;
+      }
+
+      footer {
+        text-align: center;
+        margin-top: 40px;
+        padding-top: 25px;
+        border-top: 1px solid rgba(173, 216, 230, 0.5);
+        color: #4a5568;
+        font-size: 14px;
+        position: relative;
+      }
+
+      footer::before {
+        content: "❄❄❄";
+        position: absolute;
+        top: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: white;
+        padding: 0 15px;
+        color: #66b3ff;
+        letter-spacing: 5px;
+      }
+
+      /* Winter decorative elements */
+      .snowflake {
+        position: absolute;
+        color: #b3e0ff;
+        font-size: 20px;
+        opacity: 0.7;
+        z-index: -1;
+      }
+
+      .snowflake:nth-child(1) {
+        top: 10%;
+        left: 10%;
+      }
+      .snowflake:nth-child(2) {
+        top: 20%;
+        right: 15%;
+      }
+      .snowflake:nth-child(3) {
+        bottom: 30%;
+        left: 5%;
+      }
+      .snowflake:nth-child(4) {
+        bottom: 15%;
+        right: 10%;
+      }
+
+      /* Responsive design */
+      @media (max-width: 600px) {
+        .container {
+          padding: 20px;
+        }
+
+        .project {
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Snowflake decorative elements -->
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❅</div>
+    <div class="snowflake">❆</div>
+    <div class="snowflake">❄</div>
+
+    <div class="container">
+      <header>
+        <h1>My GitHub Projects</h1>
+        <p>A collection of my web development projects</p>
+      </header>
+
+      <main>
+        <!-- Projects -->
+        <div class="project">
+          <h3>Travel Destination</h3>
+          <p>
+            A travel destination website with information about various places
+            to visit.
+          </p>
+          <a href="./HTML-CSS/Homework-1/travel-destination/index.html"
+            >View Project</a
+          >
+        </div>
+
+        <div class="project">
+          <h3>Neoplasticism</h3>
+          <p>
+            A design project exploring the neoplasticism art movement with
+            geometric shapes and primary colors.
+          </p>
+          <a href="./HTML-CSS/Homework-2/neoplasticism/index.html"
+            >View Project</a
+          >
+        </div>
+
+        <div class="project">
+          <h3>Nordic Glans</h3>
+          <p>
+            A website showcasing Nordic design aesthetics with clean lines and
+            minimalist approach.
+          </p>
+          <a href="./HTML-CSS/Bonus/nordic-glans/index.html">View Project</a>
+        </div>
+
+        <div class="project">
+          <h3>Loading Animations</h3>
+          <p>Four different creative loading animations built with CSS.</p>
+          <a href="./HTML-CSS/loading/index.html">View Project</a>
+        </div>
+
+        <div class="project">
+          <h3>Phone Price Calculator</h3>
+          <p>A functional calculator web application built with JavaScript.</p>
+          <a href="./Javascript-Basic/Homework-1/PhoneCalculator/index.html">
+            View Project</a
+          >
+        </div>
+      </main>
+
+      <footer>
+        <p>
+          © 2025 My Projects. All links are relative to the repository
+          structure.
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>box-sizing: border-box;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       }
 
