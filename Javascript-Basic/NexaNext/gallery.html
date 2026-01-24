@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Photo Gallery - NexaNext</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/gallery.css" />
+    <link rel="icon" type="image/webp" href="./images/logoNN.webp" />
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <h1><a href="index.html">NexaNext</a></h1>
+          </div>
+          <nav class="main-nav">
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="profile.html?id=1">Sample Profile</a></li>
+              <li>
+                <a href="gallery.html?id=1" class="active">Sample Gallery</a>
+              </li>
+              <!-- Lägg till denna auth-sektion -->
+              <li id="auth-section">
+                <div class="auth-placeholder">
+                  <a href="login.html">Login</a> |
+                  <a href="register.html">Register</a>
+                </div>
+              </li>
+              <li>
+                <button id="theme-toggle" class="theme-toggle-btn">
+                  <span class="theme-icon">🌙</span>
+                  <span class="theme-text">Dark Mode</span>
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="back-button">
+        <a href="profile.html?id=1">&larr; Back to Profile</a>
+        <!-- FIXED LINK -->
+      </div>
+
+      <div id="loading-indicator" class="loading">
+        <div class="spinner"></div>
+        <p>Loading gallery...</p>
+      </div>
+
+      <div id="error-message" class="error-message" style="display: none">
+        <p>Failed to load gallery. Please try again.</p>
+        <button id="retry-button">Retry</button>
+      </div>
+
+      <div id="gallery-content" style="display: none">
+        <!-- Gallery content will be loaded here -->
+      </div>
+    </main>
+
+    <!-- Image Modal -->
+    <div id="image-modal" class="image-modal">
+      <div class="modal-content-large">
+        <button id="close-modal" class="close-modal">&times;</button>
+        <button id="prev-image" class="nav-button nav-button-left">❮</button>
+        <button id="next-image" class="nav-button nav-button-right">❯</button>
+        <img id="modal-image" src="" alt="Full size image" />
+        <div class="image-info">
+          <h3 id="image-title"></h3>
+          <p id="image-description"></p>
+          <div class="image-meta">
+            <span class="image-date" id="image-date"></span>
+            <span class="image-counter" id="image-counter"></span>
+          </div>
+          <div class="image-folder">
+            <span class="folder-icon">📁</span>
+            <span id="image-folder-name"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="main-footer">
+      <div class="container">
+        <p>&copy; 2026 NexaNext. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script type="module" src="./js/api/FakerAPI.js"></script>
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,334 @@
+/* ===== AUTH PAGES STYLING ===== */
+
+/* Färgvariabler (om inte redan i styles.css) */
+:root {
+  --primary: #2563EB;
+  --primary-dark: #1E40AF;
+  --accent: #7C3AED;
+  --background: #F8FAFC;
+  --card-bg: #FFFFFF;
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --border: #E2E8F0;
+  --error: #DC2626;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --radius: 8px;
+  --radius-lg: 16px;
+  --transition: all 0.3s ease;
+}
+
+/* Body styling */
+.auth-body {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  margin: 0;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+/* Container */
+.auth-container {
+  width: 100%;
+  max-width: 500px;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+/* Card */
+.auth-card {
+  background-color: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  animation: slideUp 0.5s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Header */
+.auth-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.auth-logo {
+  font-size: 2.5rem;
+  color: var(--primary);
+  margin-bottom: var(--spacing-md);
+  display: block;
+}
+
+.auth-header h1 {
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+.auth-header p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+/* Form */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Form row */
+.auth-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Form group */
+.auth-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.auth-form-group label {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+/* Input fields */
+.auth-form-control {
+  padding: var(--spacing-md);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background-color: var(--background);
+  color: var(--text-primary);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 1rem;
+  transition: var(--transition);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  line-height: 1.5;
+}
+
+.auth-form-control:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.auth-form-control.error {
+  border-color: var(--error);
+}
+
+/* Error messages */
+.auth-error-message {
+  color: var(--error);
+  font-size: 0.75rem;
+  margin-top: 4px;
+  display: none;
+}
+
+.auth-error-message.show {
+  display: block;
+}
+
+/* Auth button (används av både login och register) */
+.auth-btn {
+  padding: var(--spacing-md);
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: var(--spacing-lg);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.auth-btn:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+/* Login-specifik knapp */
+.login-btn {
+  padding: var(--spacing-md);
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: var(--spacing-sm);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Form footer */
+.auth-form-footer {
+  text-align: center;
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--border);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.auth-form-footer p {
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-sm);
+  font-size: 0.875rem;
+}
+
+.auth-form-footer a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-form-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Guest login (endast för login-sidan) */
+.guest-login {
+  text-align: center;
+  margin-top: var(--spacing-lg);
+}
+
+.guest-btn {
+  background-color: transparent;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: var(--transition);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.guest-btn:hover {
+  background-color: var(--primary);
+  color: white;
+}
+
+/* Textarea */
+textarea.auth-form-control {
+  resize: vertical;
+  min-height: 100px;
+  max-height: 200px;
+}
+
+/* Profile image section (endast för register) */
+.profile-image-section {
+  text-align: center;
+  margin: var(--spacing-lg) 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.profile-image-container {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto var(--spacing-md);
+  position: relative;
+}
+
+.profile-image-preview {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--primary);
+  background-color: var(--background);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.profile-image-preview:hover {
+  opacity: 0.9;
+}
+
+.image-upload-btn {
+  display: inline-block;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--background);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.image-upload-btn:hover {
+  background-color: var(--border);
+}
+
+input[type="file"] {
+  display: none;
+}
+
+/* Animation */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .auth-form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-card {
+    padding: var(--spacing-lg);
+  }
+  
+  .auth-logo {
+    font-size: 2rem;
+  }
+  
+  .auth-header h1 {
+    font-size: 1.5rem;
+  }
+}

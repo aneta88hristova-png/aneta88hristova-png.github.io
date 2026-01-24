@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile - NexaNext</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/profile.css" />
+    <link rel="icon" type="image/webp" href="./images/logoNN.webp" />
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <h1><a href="index.html">NexaNext</a></h1>
+          </div>
+          <nav class="main-nav">
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li>
+                <a href="profile.html?id=1" class="active">Sample Profile</a>
+              </li>
+              <li><a href="gallery.html?id=1">Sample Gallery</a></li>
+              <!-- Lägg till denna auth-sektion -->
+              <li id="auth-section">
+                <div class="auth-placeholder">
+                  <a href="login.html">Login</a> |
+                  <a href="register.html">Register</a>
+                </div>
+              </li>
+              <li>
+                <button id="theme-toggle" class="theme-toggle-btn">
+                  <span class="theme-icon">🌙</span>
+                  <span class="theme-text">Dark Mode</span>
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="back-button">
+        <a href="index.html">&larr; Back to Users</a>
+      </div>
+
+      <div id="loading-indicator" class="loading">
+        <div class="spinner"></div>
+        <p>Loading profile...</p>
+      </div>
+
+      <div id="error-message" class="error-message" style="display: none">
+        <p>Failed to load profile. Please try again.</p>
+        <button id="retry-button">Retry</button>
+      </div>
+
+      <div id="profile-content" style="display: none">
+        <!-- Profile content will be loaded here by JavaScript -->
+      </div>
+    </main>
+
+    <!-- Message Modal -->
+    <div id="message-modal" class="message-modal">
+      <div class="modal-content-small">
+        <h3>Send Message</h3>
+        <textarea
+          id="message-text"
+          class="post-input"
+          placeholder="Type your message here..."
+          rows="4"
+        ></textarea>
+        <div class="modal-actions">
+          <button id="cancel-message" class="secondary-button">Cancel</button>
+          <button id="send-message" class="primary-button">Send Message</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Call Confirmation -->
+    <div id="call-confirmation" class="call-confirmation">
+      <p>Call <span id="phone-number-display"></span>?</p>
+      <div class="modal-actions">
+        <button id="cancel-call" class="secondary-button">Cancel</button>
+        <a id="call-link" href="#" class="primary-button">Call</a>
+      </div>
+    </div>
+
+    <!-- Comments Modal -->
+    <div id="comments-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Comments</h3>
+          <button class="close-modal">&times;</button>
+        </div>
+        <div id="comments-container" class="comments-container">
+          <!-- Comments will be loaded here -->
+        </div>
+        <div class="comment-input-container">
+          <textarea
+            id="new-comment-input"
+            placeholder="Write a comment..."
+            rows="2"
+          ></textarea>
+          <button id="post-comment-btn" class="primary-button">Post</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Share Modal -->
+    <div id="share-modal" class="modal">
+      <div class="modal-content-small">
+        <div class="modal-header">
+          <h3>Share Post</h3>
+          <button class="close-modal">&times;</button>
+        </div>
+        <div class="share-options">
+          <button class="share-option-btn" data-platform="copy">
+            <span>📋</span>
+            Copy Link
+          </button>
+          <button class="share-option-btn" data-platform="twitter">
+            <span>🐦</span>
+            Twitter
+          </button>
+          <button class="share-option-btn" data-platform="facebook">
+            <span>📘</span>
+            Facebook
+          </button>
+          <button class="share-option-btn" data-platform="linkedin">
+            <span>💼</span>
+            LinkedIn
+          </button>
+          <button class="share-option-btn" data-platform="email">
+            <span>✉️</span>
+            Email
+          </button>
+        </div>
+        <div class="share-input-container">
+          <label for="share-message">Add a message (optional):</label>
+          <textarea
+            id="share-message"
+            placeholder="Add your message here..."
+            rows="3"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+
+    <footer class="main-footer">
+      <div class="container">
+        <p>&copy; 2026 NexaNext. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script type="module" src="./js/api/FakerAPI.js"></script>
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>

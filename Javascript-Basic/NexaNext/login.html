@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - NexaNext</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/auth.css" />
+    <link rel="icon" type="image/webp" href="./images/logoNN.webp" />
+  </head>
+  <body class="auth-body">
+    <div class="auth-container">
+      <div class="auth-card">
+        <div class="auth-header">
+          <div class="auth-logo">👥</div>
+          <h1>Welcome to NexaNext</h1>
+          <p>Sign in to connect with your friends</p>
+        </div>
+
+        <form id="loginForm" class="auth-form">
+          <div class="auth-form-group">
+            <label for="email">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              class="auth-form-control"
+              placeholder="you@example.com"
+              required
+            />
+            <div id="email-error" class="auth-error-message">
+              Please enter a valid email address
+            </div>
+          </div>
+
+          <div class="auth-form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              class="auth-form-control"
+              placeholder="Enter your password"
+              required
+              minlength="6"
+            />
+            <div id="password-error" class="auth-error-message">
+              Password must be at least 6 characters
+            </div>
+          </div>
+
+          <button type="submit" id="submit-btn" class="login-btn">
+            Sign In
+          </button>
+
+          <div class="guest-login">
+            <button type="button" id="guest-btn" class="guest-btn">
+              Continue as Guest
+            </button>
+          </div>
+        </form>
+        <div class="auth-form-footer">
+          <p>
+            Don't have an account?
+            <a href="register.html" id="signup-link">Create account</a>
+          </p>
+          <p>
+            <a href="#" id="forgot-link">Forgot your password?</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./js/pages/LoginPage.js"></script>
+  </body>
+</html>
