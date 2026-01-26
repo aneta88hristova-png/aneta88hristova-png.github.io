@@ -1,47 +1,43 @@
 import { setupThemeToggle } from "./utils/theme.js";
 import { FakerAPI } from "./api/FakerAPI.js";
 
-// Import pages (they will be loaded dynamically when needed)
 let HomePage, ProfilePage, GalleryPage;
 
 const sendToErrorTracking = (error, context = {}) => {
-  console.error('Error occurred:', {
+  console.error("Error occurred:", {
     error: error.message || error,
     stack: error.stack,
     context: context,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   });
 
   return false;
 };
 
 const handleUnhandledRejection = (reason) => {
-  console.error('Unhandled Promise Rejection:', reason);
-  
-  // Log to error tracking
-  sendToErrorTracking(reason instanceof Error ? reason : new Error(String(reason)), {
-    type: 'unhandled_rejection'
-  });
-  
-  // Optional: Show user-friendly message for critical errors
-  if (reason && reason.message && reason.message.includes('critical')) {
-    showGlobalError('A critical error occurred. Please refresh the page.');
+  console.error("Unhandled Promise Rejection:", reason);
+
+  sendToErrorTracking(
+    reason instanceof Error ? reason : new Error(String(reason)),
+    {
+      type: "unhandled_rejection",
+    },
+  );
+
+  if (reason && reason.message && reason.message.includes("critical")) {
+    showGlobalError("A critical error occurred. Please refresh the page.");
   }
 };
 
-
 async function initializeApp() {
   try {
-    // First, always set up theme (works on all pages)
     setupThemeToggle();
 
-    // Check if FakerAPI is available
     if (typeof FakerAPI === "undefined") {
       showGlobalError("API library failed to load. Please refresh the page.");
       return;
     }
 
-    // Test API connection
     try {
       const connected = await FakerAPI.testConnection();
       if (connected) {
@@ -53,7 +49,6 @@ async function initializeApp() {
       document.body.classList.add("api-mock");
     }
 
-    // Load the appropriate page controller
     await loadPageController();
   } catch (error) {
     console.error("App initialization error:", error);
@@ -61,9 +56,6 @@ async function initializeApp() {
   }
 }
 
-/**
- * Load the correct page controller based on URL
- */
 async function loadPageController() {
   const path = window.location.pathname;
   const pageName = path.split("/").pop() || "index.html";
@@ -82,12 +74,8 @@ async function loadPageController() {
   }
 }
 
-/**
- * Load Home Page
- */
 async function loadHomePage() {
   try {
-    // Dynamically import to reduce initial bundle size
     const module = await import("./pages/HomePage.js");
     HomePage = module.HomePage;
 
@@ -103,9 +91,6 @@ async function loadHomePage() {
   }
 }
 
-/**
- * Load Profile Page
- */
 async function loadProfilePage() {
   try {
     const module = await import("./pages/ProfilePage.js");
@@ -123,9 +108,6 @@ async function loadProfilePage() {
   }
 }
 
-/**
- * Load Gallery Page
- */
 async function loadGalleryPage() {
   try {
     const module = await import("./pages/GalleryPage.js");
@@ -143,9 +125,6 @@ async function loadGalleryPage() {
   }
 }
 
-/**
- * Show global error message
- */
 function showGlobalError(message) {
   const errorDiv = document.createElement("div");
   errorDiv.id = "global-error";
@@ -183,9 +162,6 @@ function showGlobalError(message) {
   document.body.appendChild(errorDiv);
 }
 
-/**
- * Show page-specific error
- */
 function showPageError() {
   const loadingElement = document.getElementById("loading-indicator");
   const errorElement = document.getElementById("error-message");
@@ -198,7 +174,6 @@ function showPageError() {
     errorElement.style.display = "block";
   }
 
-  // Also show a toast notification
   const toast = document.createElement("div");
   toast.style.cssText = `
     position: fixed;
@@ -220,13 +195,9 @@ function showPageError() {
   }, 3000);
 }
 
-/**
- * Global error handler
- */
 window.addEventListener("error", function (event) {
   sendToErrorTracking(event.error);
 
-  // Don't show duplicate error messages
   if (
     !document.getElementById("global-error") &&
     !event.error.message.includes("setupThemeToggle")
@@ -236,26 +207,16 @@ window.addEventListener("error", function (event) {
   }
 });
 
-/**
- * Unhandled promise rejection handler
- */
 window.addEventListener("unhandledrejection", function (event) {
   handleUnhandledRejection(event.reason);
 });
 
-/**
- * Initialize when DOM is ready
- */
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initializeApp);
 } else {
-  // DOM already loaded
   initializeApp();
 }
 
-/**
- * Make some utilities available globally for debugging
- */
 if (typeof window !== "undefined") {
   window.NexaNext = {
     version: "1.0.0",
@@ -273,10 +234,9 @@ if (typeof window !== "undefined") {
     },
     debug: {
       logError: sendToErrorTracking,
-      showError: showGlobalError
-    }
+      showError: showGlobalError,
+    },
   };
 }
 
-// Export for potential module usage
 export { initializeApp, sendToErrorTracking, handleUnhandledRejection };

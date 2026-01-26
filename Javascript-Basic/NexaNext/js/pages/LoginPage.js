@@ -1,4 +1,3 @@
-// js/pages/LoginPage.js
 export class LoginPage {
   constructor() {
     this.setupEventListeners();
@@ -21,7 +20,6 @@ export class LoginPage {
       });
     }
     
-    // Signup and forgot password links
     document.getElementById('signup-link')?.addEventListener('click', (e) => {
       e.preventDefault();
       alert('Sign up feature coming soon!');
@@ -38,30 +36,27 @@ export class LoginPage {
     const password = document.getElementById('password').value;
     const submitBtn = document.getElementById('submit-btn');
     
-    // Basic validation
     if (!email || !password) {
       this.showMessage('Please fill in all fields', 'error');
       return;
     }
     
-    // Show loading
+
     submitBtn.disabled = true;
     submitBtn.textContent = 'Signing in...';
     
-    // Simulate API call
+
     setTimeout(() => {
-      // Demo users for testing
       const demoUsers = [
         { email: 'demo@nexanext.com', password: 'password123', name: 'Demo User' },
         { email: 'test@nexanext.com', password: 'test123', name: 'Test User' },
         { email: 'user@example.com', password: 'user123', name: 'Example User' }
       ];
       
-      // Check if user exists
+
       const user = demoUsers.find(u => u.email === email && u.password === password);
       
       if (user) {
-        // Save user info to localStorage
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('currentUserId', 'demo_' + Date.now());
         localStorage.setItem('currentUserEmail', user.email);
@@ -69,15 +64,12 @@ export class LoginPage {
         
         this.showMessage('Login successful! Redirecting...', 'success');
         
-        // Redirect to home page
         setTimeout(() => {
           window.location.href = 'index.html';
         }, 1500);
         
       } else {
-        // Check if it's any email with password length >= 6 (for testing)
         if (password.length >= 6) {
-          // Allow any email with valid password for testing
           localStorage.setItem('isLoggedIn', 'true');
           localStorage.setItem('currentUserId', 'user_' + Date.now());
           localStorage.setItem('currentUserEmail', email);
@@ -103,21 +95,18 @@ export class LoginPage {
     guestBtn.disabled = true;
     guestBtn.textContent = 'Entering as Guest...';
     
-    // Save guest info
     localStorage.setItem('isGuest', 'true');
     localStorage.setItem('currentUserId', 'guest_' + Date.now());
     localStorage.setItem('currentUserName', 'Guest User');
     
     this.showMessage('Welcome Guest! Enjoy browsing NexaNext', 'success');
     
-    // Redirect to home page
     setTimeout(() => {
       window.location.href = 'index.html';
     }, 1000);
   }
 
   showMessage(message, type = 'info') {
-    // Create message element
     const messageEl = document.createElement('div');
     messageEl.className = 'login-message';
     messageEl.textContent = message;
@@ -136,13 +125,12 @@ export class LoginPage {
     
     document.body.appendChild(messageEl);
     
-    // Remove after 3 seconds
     setTimeout(() => {
       messageEl.style.animation = 'slideOut 0.3s ease forwards';
       setTimeout(() => messageEl.remove(), 300);
     }, 3000);
     
-    // Add CSS animations if not present
+
     if (!document.querySelector('#login-animations')) {
       const style = document.createElement('style');
       style.id = 'login-animations';
@@ -161,7 +149,6 @@ export class LoginPage {
   }
 }
 
-// Initialize when DOM is ready
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     new LoginPage();

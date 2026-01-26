@@ -1,4 +1,3 @@
-// js/components/PostCard.js
 export class PostCard {
   constructor(post, user) {
     this.post = post;

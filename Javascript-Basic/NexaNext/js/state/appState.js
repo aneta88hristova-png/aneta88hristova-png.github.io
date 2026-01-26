@@ -1,4 +1,3 @@
-// js/state/appState.js
 export const appState = {
   currentUser: null,
   theme: localStorage.getItem('theme') || 'light',

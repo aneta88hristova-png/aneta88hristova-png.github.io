@@ -1,6 +1,6 @@
 // js/api/apiClient.js
 const API_BASE = "https://fakerapi.it/api/v2";
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minuter
+const CACHE_DURATION = 5 * 60 * 1000; 
 
 class ApiClient {
   constructor() {
@@ -131,7 +131,6 @@ class ApiClient {
   }
 
   async fetchUserAlbums(userId, limit = 6) {
-    // FakerAPI har inga albums, så vi simulerar
     const albums = [];
     for (let i = 0; i < limit; i++) {
       const photoCount = Math.floor(Math.random() * 15) + 5;

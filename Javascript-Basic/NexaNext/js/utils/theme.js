@@ -1,45 +1,30 @@
-// js/utils/theme.js
-
-/**
- * Set up theme toggle button
- */
 export function setupThemeToggle() {
   const themeToggle = document.getElementById("theme-toggle");
   if (!themeToggle) {
     return;
   }
 
-  // Get current theme from localStorage or default to 'light'
   const currentTheme = localStorage.getItem("theme") || "light";
 
-  // Apply theme to body
   document.body.setAttribute("data-theme", currentTheme);
 
-  // Update button text
   updateThemeButton(currentTheme);
 
-  // Add click event listener
   themeToggle.addEventListener("click", handleThemeToggle);
 
 }
 
-/**
- * Handle theme toggle click
- */
 function handleThemeToggle(event) {
   event.preventDefault();
 
   const currentTheme = document.body.getAttribute("data-theme");
   const newTheme = currentTheme === "light" ? "dark" : "light";
 
-  // Update theme
   document.body.setAttribute("data-theme", newTheme);
   localStorage.setItem("theme", newTheme);
 
-  // Update button
   updateThemeButton(newTheme);
 
-  // Dispatch event for other components
   window.dispatchEvent(
     new CustomEvent("themeChanged", {
       detail: { theme: newTheme },
@@ -48,9 +33,6 @@ function handleThemeToggle(event) {
 
 }
 
-/**
- * Update theme button text and icon
- */
 function updateThemeButton(theme) {
   const themeToggle = document.getElementById("theme-toggle");
   if (!themeToggle) return;
@@ -67,16 +49,10 @@ function updateThemeButton(theme) {
   }
 }
 
-/**
- * Get current theme
- */
 export function getCurrentTheme() {
   return document.body.getAttribute("data-theme") || "light";
 }
 
-/**
- * Set theme programmatically
- */
 export function setTheme(theme) {
   if (theme === "light" || theme === "dark") {
     document.body.setAttribute("data-theme", theme);
@@ -91,11 +67,7 @@ export function setTheme(theme) {
   }
 }
 
-/**
- * Update theme toggle UI based on current theme
- * This function updates the button appearance without changing the theme
- * Useful when you want to sync the button UI after theme has been changed elsewhere
- */
+
 export function updateThemeToggleUI() {
   const currentTheme = getCurrentTheme();
   updateThemeButton(currentTheme);

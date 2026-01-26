@@ -346,6 +346,6 @@ export class FakerAPI {
   }
 
   static clearCache() {
-    // Tyst cache-rensning
+
   }
 }

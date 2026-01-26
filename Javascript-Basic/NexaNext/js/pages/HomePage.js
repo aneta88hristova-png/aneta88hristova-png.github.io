@@ -31,17 +31,14 @@ export class HomePage {
   }
 
   setupEventListeners() {
-    // Retry button
     document.getElementById("retry-button")?.addEventListener("click", () => {
       this.loadUsers();
     });
 
-    // Load more button
     document.getElementById("load-more-btn")?.addEventListener("click", () => {
       this.loadMoreUsers();
     });
 
-    // Pagination
     document.getElementById("prev-page")?.addEventListener("click", () => {
       if (this.currentPage > 1) {
         this.currentPage--;
@@ -111,10 +108,9 @@ export class HomePage {
       this.users = [...this.users, ...newUsers];
       await this.renderUsers();
 
-      // Update total count
+    
       this.totalUsers = this.users.length;
 
-      // Hide load more button if we have enough users
       if (this.users.length >= 50 && loadMoreBtn) {
         loadMoreBtn.style.display = "none";
       }

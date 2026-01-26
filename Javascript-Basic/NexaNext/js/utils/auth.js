@@ -1,16 +1,12 @@
-// js/utils/auth.js
-
 export class Auth {
-  // Kontrollera om användaren är autentiserad
+
   static checkAuth() {
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     const isGuest = localStorage.getItem('isGuest') === 'true';
     const currentPage = window.location.pathname.split('/').pop();
     
-    // Sidor som inte kräver inloggning
     const publicPages = ['login.html', 'register.html', ''];
     
-    // Om inte inloggad och inte på publik sida, omdirigera till login
     if (!isLoggedIn && !isGuest && !publicPages.includes(currentPage)) {
       window.location.href = 'login.html';
       return false;
@@ -19,15 +15,13 @@ export class Auth {
     return true;
   }
   
-  // Hämta nuvarande användare
   static getCurrentUser() {
     const userId = localStorage.getItem('currentUserId');
     
     if (!userId) {
       return null;
     }
-    
-    // Om det är en registrerad användare, hämta från localStorage
+
     if (userId.startsWith('user_')) {
       const savedUsers = JSON.parse(localStorage.getItem('nexanext_users') || '[]');
       const user = savedUsers.find(u => u.id === userId);
@@ -47,7 +41,7 @@ export class Auth {
       }
     }
     
-    // Annars returnera grundläggande info
+
     return {
       id: userId,
       email: localStorage.getItem('currentUserEmail'),
@@ -60,13 +54,11 @@ export class Auth {
   static login(email, password, rememberMe = false) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        // Först kolla i localStorage för registrerade användare
         const savedUsers = JSON.parse(localStorage.getItem('nexanext_users') || '[]');
         const user = savedUsers.find(u => u.email === email);
         
         if (user) {
-          // I en riktig app skulle vi jämföra hashat lösenord
-          // För nu antar vi att lösenordet är korrekt för registrerade användare
+
           localStorage.setItem('isLoggedIn', 'true');
           localStorage.setItem('currentUserId', user.id);
           localStorage.setItem('currentUserEmail', user.email);
@@ -83,7 +75,6 @@ export class Auth {
           return;
         }
         
-        // Demo-användare som fallback
         const demoUsers = [
           { email: 'demo@nexanext.com', password: 'password123', id: 'demo_1', firstname: 'Demo', lastname: 'User' },
           { email: 'test@nexanext.com', password: 'test123', id: 'demo_2', firstname: 'Test', lastname: 'User' },
@@ -111,11 +102,10 @@ export class Auth {
         }
         
         reject(new Error('Invalid email or password'));
-      }, 1000); // Simulera nätverksfördröjning
+      }, 1000); 
     });
   }
   
-  // Logga in som gäst
   static loginAsGuest() {
     localStorage.setItem('isGuest', 'true');
     localStorage.setItem('currentUserId', 'guest_' + Date.now());
@@ -127,10 +117,9 @@ export class Auth {
     };
   }
   
-  // Registrera ny användare
   static register(userData) {
     return new Promise((resolve, reject) => {
-      // Kolla om email redan finns
+   
       const existingUsers = JSON.parse(localStorage.getItem('nexanext_users') || '[]');
       const emailExists = existingUsers.some(user => user.email === userData.email);
       
@@ -139,7 +128,6 @@ export class Auth {
         return;
       }
       
-      // Kolla om användarnamn redan finns
       const usernameExists = existingUsers.some(user => user.username === userData.username);
       
       if (usernameExists) {
@@ -147,7 +135,7 @@ export class Auth {
         return;
       }
       
-      // Skapa användarobjekt
+
       const newUser = {
         id: 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
         firstname: userData.firstname,
@@ -162,11 +150,10 @@ export class Auth {
         createdAt: new Date().toISOString()
       };
       
-      // Lägg till i localStorage
       existingUsers.push(newUser);
       localStorage.setItem('nexanext_users', JSON.stringify(existingUsers));
       
-      // Logga in automatiskt
+  
       localStorage.setItem('isLoggedIn', 'true');
       localStorage.setItem('currentUserId', newUser.id);
       localStorage.setItem('currentUserEmail', newUser.email);
@@ -179,46 +166,38 @@ export class Auth {
     });
   }
   
-  // Generera standardavatar
   static generateDefaultAvatar(username) {
     const colors = ['65c9ff', 'b6e3f4', 'c0aede', 'd1d4f9', 'ffd5dc', 'ffdfbf'];
     const randomColor = colors[Math.floor(Math.random() * colors.length)];
     return `https://api.dicebear.com/7.x/avataaars/svg?seed=${username}&backgroundColor=${randomColor}`;
   }
   
-  // Logga ut
+
   static logout() {
-    // Rensa allt utom tema och "remember me"
     const theme = localStorage.getItem('theme');
     const rememberMe = localStorage.getItem('rememberMe');
     
     localStorage.clear();
     
-    // Återställa tema om det fanns
     if (theme) {
       localStorage.setItem('theme', theme);
     }
     
-    // Återställa rememberMe om det fanns
     if (rememberMe === 'true') {
       localStorage.setItem('rememberMe', 'true');
     }
     
-    // Omdirigera till login
     window.location.href = 'login.html';
   }
   
-  // Kontrollera om inloggad
   static isLoggedIn() {
     return localStorage.getItem('isLoggedIn') === 'true';
   }
   
-  // Kontrollera om gäst
   static isGuest() {
     return localStorage.getItem('isGuest') === 'true';
   }
   
-  // Hämta användare via ID
   static getUserById(userId) {
     if (userId.startsWith('user_')) {
       const savedUsers = JSON.parse(localStorage.getItem('nexanext_users') || '[]');
@@ -227,7 +206,6 @@ export class Auth {
     return null;
   }
   
-  // Uppdatera användarprofil
   static updateUserProfile(userId, updates) {
     const savedUsers = JSON.parse(localStorage.getItem('nexanext_users') || '[]');
     const userIndex = savedUsers.findIndex(u => u.id === userId);
@@ -236,17 +214,14 @@ export class Auth {
       return false;
     }
     
-    // Uppdatera användaren
     savedUsers[userIndex] = {
       ...savedUsers[userIndex],
       ...updates,
       updatedAt: new Date().toISOString()
     };
     
-    // Spara tillbaka
     localStorage.setItem('nexanext_users', JSON.stringify(savedUsers));
     
-    // Uppdatera session om det är nuvarande användare
     const currentUserId = localStorage.getItem('currentUserId');
     if (currentUserId === userId) {
       localStorage.setItem('currentUserName', 

@@ -1,4 +1,3 @@
-// js/pages/ProfilePage.js
 import { appState } from "../state/appState.js";
 import { setupThemeToggle } from "../utils/theme.js";
 import { showNotification } from "../utils/notifications.js";
@@ -49,14 +48,12 @@ export class ProfilePage {
     }
   }
 
-  // Uppdatera loadProfileData() för att hämta från localStorage:
   async loadProfileData() {
     showLoading();
     hideError();
     hideContent("profile-content");
 
     try {
-      // First check if it's a self-registered user
       if (this.userId.startsWith("user_")) {
         const savedUsers = JSON.parse(
           localStorage.getItem("nexanext_users") || "[]",
@@ -65,16 +62,14 @@ export class ProfilePage {
 
         if (user) {
           this.userData = user;
-          this.friends = await FakerAPI.fetchUserFriends("1"); // Default friends
-          this.posts = await FakerAPI.fetchUserPosts("1"); // Default posts
+          this.friends = await FakerAPI.fetchUserFriends("1");
+          this.posts = await FakerAPI.fetchUserPosts("1");
           this.renderProfile();
           hideLoading();
           showContent("profile-content");
           return;
         }
       }
-
-      // Otherwise fetch from API as before
       const [userData, friends, posts] = await Promise.all([
         FakerAPI.fetchUserById(this.userId),
         FakerAPI.fetchUserFriends(this.userId),
@@ -151,7 +146,6 @@ export class ProfilePage {
         }
       });
 
-    // Allow Shift+Enter for new lines in textareas
     document.querySelectorAll("textarea").forEach((textarea) => {
       textarea.addEventListener("keydown", (e) => {
         if (e.key === "Enter" && e.shiftKey) {
@@ -176,7 +170,6 @@ export class ProfilePage {
       this.closeShareModal();
     });
 
-    // Share option buttons event listener
     document.addEventListener("click", (e) => {
       if (
         e.target.classList.contains("share-option-btn") ||
@@ -190,7 +183,6 @@ export class ProfilePage {
       }
     });
 
-    // Close modals on background click
     document.querySelectorAll(".modal").forEach((modal) => {
       modal.addEventListener("click", (e) => {
         if (e.target === modal) {
@@ -201,7 +193,6 @@ export class ProfilePage {
       });
     });
 
-    // Keyboard shortcuts
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
         this.closeMessageModal();
@@ -231,13 +222,10 @@ export class ProfilePage {
       hideLoading();
       showContent("profile-content");
 
-      // Setup post functionality after render
       requestAnimationFrame(() => {
         try {
           this.setupPostFunctionality();
-        } catch {
-          // Silent error handling for setup
-        }
+        } catch {}
       });
     } catch (error) {
       hideLoading();
@@ -461,7 +449,6 @@ export class ProfilePage {
     </div>
   `;
 
-    // Setup sidebar button events
     document
       .getElementById("sidebar-message-btn")
       ?.addEventListener("click", () => {
@@ -480,33 +467,28 @@ export class ProfilePage {
         this.openCallModal();
       });
 
-    // Setup create post event listeners after rendering
     this.setupCreatePostListeners();
   }
 
   setupCreatePostListeners() {
-    // Handle image upload
     document
       .getElementById("post-image-input")
       ?.addEventListener("change", (e) => {
         this.handleImageUpload(e);
       });
 
-    // Create post button
     document
       .getElementById("create-post-btn")
       ?.addEventListener("click", () => {
         this.createPost();
       });
 
-    // Cancel post button
     document.getElementById("cancel-post")?.addEventListener("click", () => {
       this.cancelPost();
     });
   }
 
   setupPostFunctionality() {
-    // Attach event listeners to posts
     this.posts.forEach((post, index) => {
       const postElement = document.querySelectorAll(".post-card")[index];
       if (postElement) {
@@ -520,7 +502,6 @@ export class ProfilePage {
           this.openCommentsModal(postId);
         });
 
-        // Use the modal for sharing
         postCard.setOnShare((postId) => {
           this.openShareModal(postId);
         });
@@ -529,7 +510,6 @@ export class ProfilePage {
       }
     });
 
-    // Attach event listeners to friends
     this.friends.slice(0, 12).forEach((friend, index) => {
       const friendElement = document.querySelectorAll(".friend-item")[index];
       if (friendElement) {
@@ -553,7 +533,6 @@ export class ProfilePage {
     }
   }
 
-  // UPLOAD IMAGE FROM COMPUTER
   handleImageUpload(event) {
     const file = event.target.files[0];
     if (file) {
@@ -563,7 +542,6 @@ export class ProfilePage {
         return;
       }
 
-      // Validate file size (max 5MB)
       if (file.size > 5 * 1024 * 1024) {
         showNotification("Image must be less than 5MB", "error");
         return;
@@ -585,7 +563,6 @@ export class ProfilePage {
     }
   }
 
-  // CREATE POST WITH IMAGE
   createPost() {
     const content = document.getElementById("post-content")?.value.trim() || "";
 
@@ -607,13 +584,11 @@ export class ProfilePage {
 
     this.posts.unshift(newPost);
 
-    // Update UI
     const postsContainer = document.getElementById("posts-container");
     if (postsContainer) {
       const postCard = new PostCard(newPost, this.userData);
       postsContainer.innerHTML = postCard.render() + postsContainer.innerHTML;
 
-      // Setup event listeners for the new post
       setTimeout(() => {
         const newPostElement = postsContainer.querySelector(
           ".post-card:first-child",
@@ -638,10 +613,8 @@ export class ProfilePage {
       }, 0);
     }
 
-    // Clear form
     this.cancelPost();
 
-    // Update posts count in profile meta
     const postsCountElement = document.querySelector(
       ".profile-meta span:nth-child(3)",
     );
@@ -662,7 +635,6 @@ export class ProfilePage {
     }
     this.newPostImage = null;
 
-    // Clear file input
     const fileInput = document.getElementById("post-image-input");
     if (fileInput) {
       fileInput.value = "";
@@ -675,7 +647,6 @@ export class ProfilePage {
       modal.style.display = "flex";
       document.body.classList.add("modal-open");
 
-      // Focus on message field
       setTimeout(() => {
         document.getElementById("message-text")?.focus();
       }, 100);
@@ -704,7 +675,6 @@ export class ProfilePage {
     }
   }
 
-  // SIMPLE DIRECT EMAIL - opens real email client
   openDirectEmail() {
     const userEmail = this.userData.email || `user${this.userId}@example.com`;
     const subject = `Professional collaboration opportunity at NexaNext`;
@@ -721,13 +691,10 @@ Best regards,
 Aneta Hristova
 Developer at NexaNext`;
 
-    // Create mailto link
     const mailtoLink = `mailto:${userEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-    // Open user's default email client
     window.location.href = mailtoLink;
 
-    // Show notification
     showNotification(`Opening email client for ${this.userData.firstname}...`);
   }
 
@@ -759,7 +726,6 @@ Developer at NexaNext`;
     const post = this.posts.find((p) => p.id === postId);
 
     if (modal && post) {
-      // Load comments for this post
       const commentsContainer = document.getElementById("comments-container");
       commentsContainer.innerHTML = `
         <div class="comment-item">
@@ -791,7 +757,6 @@ Developer at NexaNext`;
     }
   }
 
-  // ADD COMMENT
   postComment() {
     const comment = document.getElementById("new-comment-input").value.trim();
     if (comment) {
@@ -799,7 +764,6 @@ Developer at NexaNext`;
       if (post) {
         post.comments += 1;
 
-        // Update post UI
         const postElement = document.querySelector(
           `[data-post-id="${this.currentPostId}"]`,
         );
@@ -878,7 +842,6 @@ Developer at NexaNext`;
         break;
     }
 
-    // Update share count (not for copy)
     if (platform !== "copy") {
       const postElement = document.querySelector(
         `[data-post-id="${this.currentPostId}"]`,

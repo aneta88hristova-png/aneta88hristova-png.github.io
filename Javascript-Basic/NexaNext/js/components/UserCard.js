@@ -1,4 +1,3 @@
-// js/components/UserCard.js
 export class UserCard {
   constructor(user) {
     this.user = user;
@@ -31,14 +30,12 @@ export class UserCard {
   }
   
   attachEventListeners(cardElement) {
-    // Click on card
     cardElement.addEventListener('click', (e) => {
       if (!e.target.classList.contains('view-profile')) {
         window.location.href = `profile.html?id=${this.user.id}`;
       }
     });
     
-    // Click on view profile button
     const viewProfileBtn = cardElement.querySelector('.view-profile');
     if (viewProfileBtn) {
       viewProfileBtn.addEventListener('click', (e) => {

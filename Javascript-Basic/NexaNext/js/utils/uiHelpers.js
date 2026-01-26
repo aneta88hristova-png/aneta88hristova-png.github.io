@@ -1,4 +1,3 @@
-// js/utils/uiHelpers.js - SIMPLIFIED VERSION
 export function showLoading() {
   const el = document.getElementById("loading-indicator");
   if (el) el.style.display = "flex";

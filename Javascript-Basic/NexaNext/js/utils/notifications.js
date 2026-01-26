@@ -1,4 +1,3 @@
-// js/utils/notifications.js
 export function showNotification(message, type = "success") {
   const existingNotification = document.querySelector(".notification");
   if (existingNotification) {

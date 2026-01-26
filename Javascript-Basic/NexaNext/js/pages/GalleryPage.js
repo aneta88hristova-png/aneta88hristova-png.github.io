@@ -1,4 +1,3 @@
-// js/pages/GalleryPage.js
 import { GalleryItem } from "../components/GalleryItem.js";
 import { setupThemeToggle } from "../utils/theme.js";
 import { showNotification } from "../utils/notifications.js";

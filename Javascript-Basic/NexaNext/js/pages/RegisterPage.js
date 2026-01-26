@@ -19,12 +19,11 @@ export class RegisterPage {
     const profileInput = document.getElementById('profile-image-input');
     const profilePreview = document.getElementById('profile-preview');
 
-    // Profile image upload
+
     profileInput.addEventListener('change', (e) => {
       this.handleImageUpload(e);
     });
 
-    // Realtime validation
     const inputs = [
       'firstname', 'lastname', 'email', 'username', 
       'password', 'confirm-password'
@@ -37,13 +36,11 @@ export class RegisterPage {
       }
     });
 
-    // Form submit
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       this.handleRegistration();
     });
 
-    // Enter key to submit
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && !e.shiftKey) {
         const focused = document.activeElement;
@@ -58,7 +55,7 @@ export class RegisterPage {
   handleImageUpload(event) {
     const file = event.target.files[0];
     if (file) {
-      // Validate file
+  
       if (!file.type.match('image.*')) {
         this.showNotification('Please select an image file', 'error');
         return;
@@ -160,7 +157,7 @@ export class RegisterPage {
   }
 
   async handleRegistration() {
-    // Validate all fields
+
     const fields = [
       'firstname', 'lastname', 'email', 'username', 
       'password', 'confirm-password'
@@ -178,7 +175,6 @@ export class RegisterPage {
       return;
     }
 
-    // Collect form data
     const userData = {
       firstname: document.getElementById('firstname').value.trim(),
       lastname: document.getElementById('lastname').value.trim(),
@@ -192,21 +188,18 @@ export class RegisterPage {
       isActive: true
     };
 
-    // Show loading
     const submitBtn = document.getElementById('submit-btn');
     submitBtn.disabled = true;
     submitBtn.textContent = 'Creating Account...';
 
     try {
-      // Save user to localStorage
+
       await this.saveUser(userData);
       
-      // Auto-login the user
       this.autoLogin(userData);
       
       this.showNotification('Account created successfully! Welcome to NexaNext!', 'success');
       
-      // Redirect to profile
       setTimeout(() => {
         window.location.href = `profile.html?id=self`;
       }, 2000);
@@ -220,34 +213,28 @@ export class RegisterPage {
 
   generateDefaultAvatar() {
     const username = document.getElementById('username').value.trim();
-    // Use DiceBear API for a nice default avatar
     return `https://api.dicebear.com/7.x/avataaars/svg?seed=${username}&backgroundColor=65c9ff,b6e3f4,c0aede,d1d4f9,ffd5dc,ffdfbf`;
   }
 
   async saveUser(userData) {
-    // Get existing users from localStorage
     const existingUsers = JSON.parse(localStorage.getItem('nexanext_users') || '[]');
     
-    // Check if email already exists
+
     const emailExists = existingUsers.some(user => user.email === userData.email);
     if (emailExists) {
       throw new Error('An account with this email already exists');
     }
     
-    // Check if username already exists
     const usernameExists = existingUsers.some(user => user.username === userData.username);
     if (usernameExists) {
       throw new Error('Username is already taken');
     }
     
-    // Generate a unique ID
     userData.id = `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     
-    // Don't store password in plain text (in a real app, this would be hashed)
     const userToSave = { ...userData };
-    delete userToSave.password; // Remove password from saved data
+    delete userToSave.password; 
     
-    // Add to users list
     existingUsers.push(userToSave);
     localStorage.setItem('nexanext_users', JSON.stringify(existingUsers));
     
@@ -255,7 +242,6 @@ export class RegisterPage {
   }
 
   autoLogin(userData) {
-    // Set login session
     localStorage.setItem('isLoggedIn', 'true');
     localStorage.setItem('currentUserId', userData.id);
     localStorage.setItem('currentUserEmail', userData.email);
@@ -304,7 +290,6 @@ export class RegisterPage {
   }
 }
 
-// Start registration page
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     new RegisterPage();

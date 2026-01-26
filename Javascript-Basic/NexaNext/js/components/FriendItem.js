@@ -1,5 +1,3 @@
-// js/components/FriendItem.js
-
 export class FriendItem {
   constructor(friend) {
     this.friend = friend;

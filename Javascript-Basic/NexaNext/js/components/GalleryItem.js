@@ -1,8 +1,7 @@
-// js/components/GalleryItem.js
 export class GalleryItem {
   constructor(item, type = 'album') {
     this.item = item;
-    this.type = type; // 'album' or 'photo'
+    this.type = type; 
   }
 
   render() {
