@@ -5,7 +5,7 @@ let HomePage, ProfilePage, GalleryPage;
 
 const sendToErrorTracking = (error, context = {}) => {
   console.error("Error occurred:", {
-    error: error.message || error,
+    error: error.message || error,z
     stack: error.stack,
     context: context,
     timestamp: new Date().toISOString(),
