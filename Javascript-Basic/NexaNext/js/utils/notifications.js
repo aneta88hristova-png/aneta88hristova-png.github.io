@@ -14,4 +14,3 @@ export function showNotification(message, type = "success") {
     setTimeout(() => notification.remove(), 300);
   }, 3000);
 }
-z
