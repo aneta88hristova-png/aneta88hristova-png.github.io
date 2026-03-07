@@ -9,19 +9,51 @@ export class FakerAPI {
   // ==================== MOCK DATA ====================
   static generateMockUsers(quantity) {
     const firstnames = [
-      "Emma", "Olivia", "Ava", "Sophia", "Mia", "Charlotte", "Amelia", "Harper", "Evelyn",
+      "Emma",
+      "Olivia",
+      "Ava",
+      "Sophia",
+      "Mia",
+      "Charlotte",
+      "Amelia",
+      "Harper",
+      "Evelyn",
     ];
     const lastnames = [
-      "Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis",
+      "Smith",
+      "Johnson",
+      "Williams",
+      "Brown",
+      "Jones",
+      "Garcia",
+      "Miller",
+      "Davis",
     ];
     const cities = [
-      "Stockholm", "Gothenburg", "Malmo", "Uppsala", "Linkoping", "Vasteras", "Orebro",
+      "Stockholm",
+      "Gothenburg",
+      "Malmo",
+      "Uppsala",
+      "Linkoping",
+      "Vasteras",
+      "Orebro",
     ];
     const jobs = [
-      "Developer", "Designer", "Teacher", "Nurse", "Engineer", "Artist", "Manager",
+      "Developer",
+      "Designer",
+      "Teacher",
+      "Nurse",
+      "Engineer",
+      "Artist",
+      "Manager",
     ];
     const companies = [
-      "TechCorp", "DesignHub", "InnovateAB", "FutureTech", "GreenEnergy", "CreativeMinds",
+      "TechCorp",
+      "DesignHub",
+      "InnovateAB",
+      "FutureTech",
+      "GreenEnergy",
+      "CreativeMinds",
     ];
 
     return Array.from({ length: quantity }, (_, i) => {
@@ -61,21 +93,21 @@ export class FakerAPI {
 
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 3000);
-      
+
       const response = await fetch(url.toString(), {
-        signal: controller.signal
+        signal: controller.signal,
       });
-      
+
       clearTimeout(timeoutId);
 
       if (!response.ok) {
-        return null; 
+        return null;
       }
 
       const data = await response.json();
       return data.data || [];
     } catch (error) {
-      return null; 
+      return null;
     }
   }
 
@@ -117,18 +149,17 @@ export class FakerAPI {
   }
 
   static async fetchUsers(quantity = 50) {
-    
     try {
       const apiWorking = await this.testConnection();
-      
+
       if (!apiWorking) {
         return FakerAPI.generateMockUsers(quantity);
       }
 
-      const timeoutPromise = new Promise((_, reject) => 
-        setTimeout(() => reject(), 5000)
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(), 5000),
       );
-      
+
       const apiPromise = (async () => {
         const persons = await FakerAPI.fetchFromAPI("persons", {
           _quantity: quantity,
@@ -149,7 +180,9 @@ export class FakerAPI {
             lastname: person.lastname || "Doe",
             email: person.email || `user${index + 1}@example.com`,
             phone: person.phone || "",
-            image: person.image || FakerAPI.getPicsumPhoto(person.id || index, 200, 200),
+            image:
+              person.image ||
+              FakerAPI.getPicsumPhoto(person.id || index, 200, 200),
             address: {
               street: person.address?.street || "",
               city: person.address?.city || "Unknown",
@@ -158,18 +191,17 @@ export class FakerAPI {
             },
             company: {
               name: companies[index % companies.length]?.name || "Company",
-              title: companies[index % companies.length]?.type || "Professional",
+              title:
+                companies[index % companies.length]?.type || "Professional",
             },
           }));
         }
         return null;
       })();
 
-      const result = await Promise.race([apiPromise, timeoutPromise]);
+      const result = await ise.race([apiPromise, timeoutPromise]);
       if (result) return result;
-      
-    } catch (error) {
-    }
+    } catch (error) {}
 
     // Fallback till mock data
     return FakerAPI.generateMockUsers(quantity);
@@ -177,13 +209,13 @@ export class FakerAPI {
 
   static async fetchUserById(id) {
     try {
-      const timeoutPromise = new Promise((_, reject) => 
-        setTimeout(() => reject(), 4000)
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(), 4000),
       );
-      
+
       const usersPromise = FakerAPI.fetchUsers(10);
       const users = await Promise.race([usersPromise, timeoutPromise]);
-      
+
       let user = users.find((u) => u.id === parseInt(id));
 
       if (!user) {
@@ -216,14 +248,14 @@ export class FakerAPI {
       };
     } catch (error) {
       const mockUsers = FakerAPI.generateMockUsers(1);
-      return { 
-        ...mockUsers[0], 
+      return {
+        ...mockUsers[0],
         id: parseInt(id),
         bio: `Hello! I'm ${mockUsers[0].firstname}. Welcome to my profile!`,
         joinedDate: "January 2023",
         education: "University Graduate",
         relationship: "Single",
-        hobbies: ["Photography", "Traveling", "Reading"]
+        hobbies: ["Photography", "Traveling", "Reading"],
       };
     }
   }
@@ -257,10 +289,10 @@ export class FakerAPI {
 
   static async fetchUserFriends(userId, limit = 6) {
     try {
-      const timeoutPromise = new Promise((_, reject) => 
-        setTimeout(() => reject(), 4000)
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(), 4000),
       );
-      
+
       const usersPromise = FakerAPI.fetchUsers(limit + 5);
       const users = await Promise.race([usersPromise, timeoutPromise]);
       const friends = users.slice(0, limit);
@@ -313,7 +345,8 @@ export class FakerAPI {
       likes: Math.floor(Math.random() * 100) + 50, // Mindre antal för realism
       comments: Math.floor(Math.random() * 50) + 5,
       shares: Math.floor(Math.random() * 20) + 2,
-      image: i % 3 === 0 ? FakerAPI.getPicsumPhoto(`${userId}${i}`, 600, 400) : null,
+      image:
+        i % 3 === 0 ? FakerAPI.getPicsumPhoto(`${userId}${i}`, 600, 400) : null,
     }));
   }
 
@@ -345,7 +378,5 @@ export class FakerAPI {
     };
   }
 
-  static clearCache() {
-
-  }
+  static clearCache() {}
 }
