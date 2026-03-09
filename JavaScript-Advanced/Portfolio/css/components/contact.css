@@ -1,0 +1,87 @@
+.contact-section {
+  padding: var(--spacing-xxl) 5%;
+  text-align: center;
+  background: rgba(3, 3, 3, 0.9);
+}
+
+.contact-section h2 {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 400;
+  background: linear-gradient(135deg, var(--purple), var(--blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--spacing-sm);
+  letter-spacing: 2px;
+}
+
+.contact-section p {
+  font-size: var(--font-size-lg);
+  color: var(--light);
+  margin-bottom: var(--spacing-lg);
+  font-family: var(--font-primary);
+}
+
+.contact-info {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-xl);
+  flex-wrap: wrap;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background: var(--glass);
+  border: 1px solid rgba(82, 163, 201, 0.2);
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(5px);
+  transition: all var(--transition-fast);
+}
+
+.contact-item:hover {
+  border-color: var(--purple);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(160, 80, 197, 0.2);
+}
+
+.contact-item i {
+  font-size: 1.5rem;
+  color: var(--blue);
+  filter: drop-shadow(0 2px 5px rgba(82, 163, 201, 0.3));
+}
+
+.contact-item a,
+.contact-item span {
+  color: white;
+  text-decoration: none;
+  font-size: var(--font-size-md);
+  font-family: var(--font-primary);
+}
+
+.contact-item a:hover {
+  color: var(--purple);
+}
+
+@media screen and (max-width: 768px) {
+  .contact-info {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+  
+  .contact-item {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .contact-section h2 {
+    font-size: 2rem;
+  }
+}

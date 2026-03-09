@@ -1,0 +1,43 @@
+:root {
+  --purple: rgb(160, 80, 197);
+  --gold: rgb(214, 162, 60);
+  --red: rgb(194, 26, 15);
+  --orange: rgb(242, 55, 9);
+  --peach: rgb(253, 205, 130);
+  --blue: rgb(82, 163, 201);
+  --dark: rgb(3, 3, 3);
+  --light: rgba(255, 255, 255, 0.8);
+  --glass: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(160, 80, 197, 0.2);
+
+  --font-primary: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --font-display: "Dancing Script", cursive;
+  --font-size-sm: 0.9rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.2rem;
+  --font-size-xl: 1.7rem;
+  --font-size-xxl: clamp(3.5rem, 8vw, 5rem);
+
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  --spacing-xxl: 5rem;
+
+  --radius-sm: 15px;
+  --radius-md: 25px;
+  --radius-lg: 30px;
+  --radius-full: 50px;
+
+  --transition-fast: 0.3s ease;
+  --transition-normal: 0.5s ease;
+
+  --shadow-sm: 0 10px 20px rgba(160, 80, 197, 0.2);
+  --shadow-md: 0 15px 30px rgba(160, 80, 197, 0.3);
+  --shadow-lg: -5px 0 30px rgba(0, 0, 0, 0.5);
+}
+
+html {
+  scroll-behavior: smooth;
+}

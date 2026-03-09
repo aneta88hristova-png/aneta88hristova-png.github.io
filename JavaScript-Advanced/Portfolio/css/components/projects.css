@@ -1,0 +1,216 @@
+.projects-section {
+  padding: 8rem 5% 5rem;
+  background: rgba(3, 3, 3, 0.9);
+  min-height: 100vh;
+}
+
+.projects-section .container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.projects-section header {
+  text-align: center;
+  margin-bottom: var(--spacing-xxl);
+}
+
+.projects-section h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 400;
+  background: linear-gradient(135deg, var(--purple), var(--blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--spacing-sm);
+  letter-spacing: 2px;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--spacing-lg);
+  width: 100%;
+}
+
+.project-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(82, 163, 201, 0.2);
+  border-radius: 15px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--purple);
+  box-shadow: 0 10px 30px rgba(160, 80, 197, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.project-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid rgba(82, 163, 201, 0.2);
+}
+
+.project-content {
+  padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-content h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--blue);
+  transition: color 0.3s ease;
+}
+
+.project-card:hover .project-content h3 {
+  color: var(--purple);
+}
+
+.project-content p {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.tech-badge {
+  background: rgba(82, 163, 201, 0.1);
+  color: var(--blue);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  border: 1px solid rgba(160, 80, 197, 0.3);
+  transition: all 0.3s ease;
+}
+
+.tech-badge:hover {
+  background: rgba(160, 80, 197, 0.2);
+  color: var(--purple);
+  border-color: var(--purple);
+}
+
+.project-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: auto;
+  width: 100%;
+}
+
+.project-links a {
+  padding: 0.6rem 1.2rem;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-align: center;
+  flex: 1;
+}
+
+.project-links a:first-child {
+  background: linear-gradient(135deg, var(--purple), var(--blue));
+  color: white;
+}
+
+.project-links a:last-child {
+  background: transparent;
+  border: 2px solid var(--blue);
+  color: white;
+}
+
+.project-links a:last-child:hover {
+  border-color: var(--purple);
+  background: rgba(160, 80, 197, 0.1);
+  transform: translateY(-2px);
+}
+
+.project-links a:first-child:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(160, 80, 197, 0.3);
+}
+
+.project-card.featured {
+  position: relative;
+  border: 2px solid var(--purple);
+  overflow: hidden;
+}
+
+.project-card.featured::before {
+  content: "⭐ Featured";
+  position: absolute;
+  top: 10px;
+  right: -30px;
+  background: linear-gradient(135deg, var(--purple), var(--blue));
+  color: white;
+  padding: 5px 30px;
+  transform: rotate(45deg);
+  font-size: 0.8rem;
+  font-weight: bold;
+  z-index: 10;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.loading, .error-message {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.7);
+  grid-column: 1 / -1;
+}
+
+.error-message {
+  color: var(--red);
+}
+
+@media screen and (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .project-content {
+    padding: 1.2rem;
+  }
+  
+  .project-links {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  .project-links a {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .projects-section {
+    padding: 6rem 1rem 3rem;
+  }
+  
+  .project-content h3 {
+    font-size: 1.3rem;
+  }
+  
+  .tech-badge {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.8rem;
+  }
+}
