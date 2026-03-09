@@ -147,27 +147,6 @@
   box-shadow: 0 5px 15px rgba(160, 80, 197, 0.3);
 }
 
-.project-card.featured {
-  position: relative;
-  border: 2px solid var(--purple);
-  overflow: hidden;
-}
-
-.project-card.featured::before {
-  content: "⭐ Featured";
-  position: absolute;
-  top: 10px;
-  right: -30px;
-  background: linear-gradient(135deg, var(--purple), var(--blue));
-  color: white;
-  padding: 5px 30px;
-  transform: rotate(45deg);
-  font-size: 0.8rem;
-  font-weight: bold;
-  z-index: 10;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
 .loading, .error-message {
   text-align: center;
   padding: 3rem;

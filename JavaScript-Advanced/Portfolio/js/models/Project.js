@@ -7,7 +7,6 @@ export class Project {
     this.image = data.image || './images/projects/default.jpg';
     this.github = data.github;
     this.live = data.live;
-    this.featured = data.featured || false;
   }
   
   getTechBadges() {
@@ -20,7 +19,7 @@ export class Project {
   
   toHtml() {
     return `
-      <article class="project-card ${this.featured ? 'featured' : ''}">
+      <article class="project-card">
         <img src="${this.image}" alt="${this.title}" loading="lazy">
         <div class="project-content">
           <h3>${this.title}</h3>
