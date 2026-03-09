@@ -1,6 +1,6 @@
-import ApiService from './services/apiService.js';
-import * as Render from './utils/render.js';
-import EmailService from './services/emailService.js';
+import ApiService from "./services/apiService.js";
+import * as Render from "./utils/render.js";
+import EmailService from "./services/emailService.js";
 
 class Portfolio {
   constructor() {
@@ -17,10 +17,10 @@ class Portfolio {
   async loadData() {
     try {
       this.showLoadingStates();
-      
+
       const [projects, profile] = await Promise.all([
         ApiService.fetchProjects(),
-        ApiService.fetchProfile()
+        ApiService.fetchProfile(),
       ]);
 
       this.projects = projects;
@@ -29,90 +29,73 @@ class Portfolio {
       this.renderProjects();
       this.renderProfile();
       this.updateContactInfo();
-
     } catch (error) {
-      this.showErrorMessage('An unexpected error occurred. Please try again later.');
+      this.showErrorMessage(
+        "An unexpected error occurred. Please try again later.",
+      );
     }
   }
 
   showLoadingStates() {
-    const projectsContainer = document.getElementById('projects-container');
+    const projectsContainer = document.getElementById("projects-container");
     if (projectsContainer) {
       Render.showLoading(projectsContainer);
     }
   }
 
   showErrorMessage(message) {
-    const projectsContainer = document.getElementById('projects-container');
+    const projectsContainer = document.getElementById("projects-container");
     if (projectsContainer) {
       Render.showError(projectsContainer, message);
     }
   }
 
   renderProjects() {
-    const container = document.getElementById('projects-container');
+    const container = document.getElementById("projects-container");
     if (!container) return;
-    
+
     if (!this.projects || this.projects.length === 0) {
-      Render.showError(container, 'No projects found');
+      Render.showError(container, "No projects found");
       return;
     }
-    
-    Render.renderProjects(container, this.projects);
+
+    try {
+      const projectsHtml = this.projects
+        .map((project) => project.toHtml())
+        .join("");
+      container.innerHTML = projectsHtml;
+    } catch (error) {
+      Render.showError(container, "Error rendering projects");
+    }
   }
 
   renderProfile() {
     if (!this.profile) return;
 
-    const bioElement = document.querySelector('.profile-bio');
+    const bioElement = document.querySelector(".profile-bio");
     if (bioElement && this.profile.bio) {
-      bioElement.innerHTML = this.profile.bio.replace(/\n/g, '<br>');
-    }
-
-    const greetingElement = document.querySelector('.hero-greeting');
-    if (greetingElement && this.profile.name && this.profile.title) {
-      const location = this.profile.location || 'Sweden';
-      greetingElement.innerHTML = `Hi, I'm <strong>${this.profile.name}</strong>, a <strong>${this.profile.title}</strong> based in ${location}.`;
-    }
-
-    const nameElement = document.querySelector('.profile-name');
-    if (nameElement && this.profile.name) {
-      nameElement.textContent = this.profile.name;
-    }
-
-    const titleElement = document.querySelector('.profile-title');
-    if (titleElement && this.profile.title) {
-      titleElement.textContent = this.profile.title;
-    }
-
-    const aboutElement = document.querySelector('.profile-about');
-    if (aboutElement && this.profile.about) {
-      aboutElement.textContent = this.profile.about;
-    }
-
-    const skillsContainer = document.querySelector('.skills-container');
-    if (skillsContainer && this.profile.skills) {
-      skillsContainer.innerHTML = this.profile.getSkillList();
+      bioElement.innerHTML = this.profile.bio.replace(/\n/g, "<br>");
     }
   }
 
   updateContactInfo() {
-    const emailElement = document.getElementById('contact-email');
-    const phoneElement = document.getElementById('contact-phone');
-    const locationElement = document.getElementById('contact-location');
+    const emailElement = document.getElementById("contact-email");
+    const phoneElement = document.getElementById("contact-phone");
+    const locationElement = document.getElementById("contact-location");
 
     if (this.profile) {
       if (emailElement) {
-        emailElement.textContent = this.profile.email || 'Email not available';
-        emailElement.href = `mailto:${this.profile.email || ''}`;
+        emailElement.textContent = this.profile.email || "Email not available";
+        emailElement.href = `mailto:${this.profile.email || ""}`;
       }
-      
+
       if (phoneElement) {
-        phoneElement.textContent = this.profile.phone || 'Phone not available';
+        phoneElement.textContent = this.profile.phone || "Phone not available";
       }
-      
+
       if (locationElement) {
-        locationElement.textContent = this.profile.location || 'Location not available';
+        locationElement.textContent =
+          this.profile.location || "Location not available";
       }
 
       this.updateSocialLinks();
@@ -122,87 +105,77 @@ class Portfolio {
   updateSocialLinks() {
     if (!this.profile) return;
 
-    const githubLinks = document.querySelectorAll('a[href*="github"]');
-    githubLinks.forEach(link => {
-      if (this.profile.github) {
-        link.href = this.profile.github;
-      }
-    });
+    const githubLink = document.querySelector('.social-icon[href*="github"]');
+    if (githubLink && this.profile.github) {
+      githubLink.href = this.profile.github;
+    }
 
-    const linkedinLinks = document.querySelectorAll('a[href*="linkedin"]');
-    linkedinLinks.forEach(link => {
-      if (this.profile.linkedin) {
-        link.href = this.profile.linkedin;
-      }
-    });
+    const linkedinLink = document.querySelector(
+      '.social-icon[href*="linkedin"]',
+    );
+    if (linkedinLink && this.profile.linkedin) {
+      linkedinLink.href = this.profile.linkedin;
+    }
   }
 
   setupEventListeners() {
-    document.querySelectorAll('.nav-links a, .btn').forEach(link => {
-      link.addEventListener('click', (e) => {
-        const href = link.getAttribute('href');
-        if (href && href.startsWith('#')) {
+    document.querySelectorAll(".nav-links a, .btn").forEach((link) => {
+      link.addEventListener("click", (e) => {
+        const href = link.getAttribute("href");
+        if (href && href.startsWith("#")) {
           e.preventDefault();
           const target = document.querySelector(href);
           if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
+            target.scrollIntoView({ behavior: "smooth" });
           }
         }
       });
     });
 
-    const contactForm = document.getElementById('contact-form');
+    const contactForm = document.getElementById("contact-form");
     if (contactForm) {
-      contactForm.addEventListener('submit', this.handleContactSubmit.bind(this));
+      contactForm.addEventListener(
+        "submit",
+        this.handleContactSubmit.bind(this),
+      );
     }
   }
 
   async handleContactSubmit(e) {
     e.preventDefault();
-    
+
     const form = e.target;
     const formData = {
-      name: form.name.value.trim(),
-      email: form.email.value.trim(),
-      message: form.message.value.trim()
+      name: form.name.value,
+      email: form.email.value,
+      message: form.message.value,
     };
-
-    if (!formData.name || !formData.email || !formData.message) {
-      alert('Please fill in all fields');
-      return;
-    }
-
-    if (formData.name.length < 2) {
-      alert('Name must be at least 2 characters');
-      return;
-    }
-
-    if (!formData.email.includes('@') || !formData.email.includes('.')) {
-      alert('Please enter a valid email address');
-      return;
-    }
-
-    if (formData.message.length < 10) {
-      alert('Message must be at least 10 characters');
-      return;
-    }
 
     const submitBtn = form.querySelector('button[type="submit"]');
     const originalText = submitBtn.textContent;
-    submitBtn.textContent = 'Sending...';
+    submitBtn.textContent = "Sending...";
     submitBtn.disabled = true;
 
     try {
       const result = await EmailService.sendContactEmail(formData);
 
       if (result.success) {
-        alert('Thank you for your message! I will get back to you as soon as possible.');
+        alert(
+          result.message ||
+            "Thank you for your message! I will get back to you as soon as possible.",
+        );
         form.reset();
       } else {
-        alert(result.errors ? result.errors.join('\n') : 'An error occurred. Please try again.');
+        alert(
+          result.errors
+            ? result.errors.join("\n")
+            : "An error occurred. Please try again.",
+        );
       }
     } catch (error) {
-      alert('A technical error occurred. Please try again later or contact me directly via email.');
+      alert(
+        "A technical error occurred. Please try again later or contact me directly via email.",
+      );
     } finally {
       submitBtn.textContent = originalText;
       submitBtn.disabled = false;
@@ -210,7 +183,7 @@ class Portfolio {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   try {
     new Portfolio();
   } catch (error) {

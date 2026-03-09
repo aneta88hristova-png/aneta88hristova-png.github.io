@@ -6,7 +6,7 @@
     "tech": ["HTML", "CSS", "JavaScript"],
     "image": "./images/NexaNext.webp",
     "github": "https://github.com/aneta88hristova-png/aneta88hristova-png.github.io/tree/main/Javascript-Basic/NexaNext",
-    "live": "https://aneta88hristova-png.github.io/Javascript-Basic/NexaNext/index.html",
+    "live": "https://aneta88hristova-png.github.io/Javascript-Basic/NexaNext/",
     "featured": true
   },
   {
@@ -16,7 +16,7 @@
     "tech": ["HTML", "CSS"],
     "image": "./images/TravelDestination.webp",
     "github": "https://github.com/aneta88hristova-png/aneta88hristova-png.github.io/tree/main/HTML-CSS/Homework-1/travel-destination",
-    "live": "https://aneta88hristova-png.github.io/HTML-CSS/Homework-1/travel-destination/index.html",
+    "live": "https://aneta88hristova-png.github.io/HTML-CSS/Homework-1/travel-destination/",
     "featured": false
   },
   {
@@ -26,7 +26,7 @@
     "tech": ["HTML", "CSS"],
     "image": "./images/NordicGlans.webp",
     "github": "https://github.com/aneta88hristova-png/aneta88hristova-png.github.io/tree/main/HTML-CSS/Bonus/nordic-glans",
-    "live": "https://aneta88hristova-png.github.io/HTML-CSS/Bonus/nordic-glans/index.html",
+    "live": "https://aneta88hristova-png.github.io/HTML-CSS/Bonus/nordic-glans/",
     "featured": false
   }
 ]
