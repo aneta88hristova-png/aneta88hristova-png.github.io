@@ -141,45 +141,91 @@ class Portfolio {
     }
   }
 
+  getMessageElement() {
+    let messageDiv = document.getElementById("form-message");
+
+    if (!messageDiv) {
+      messageDiv = document.createElement("div");
+      messageDiv.id = "form-message";
+      messageDiv.style.marginTop = "1rem";
+
+      const form = document.getElementById("contact-form");
+      if (form) {
+        form.appendChild(messageDiv);
+      }
+    }
+
+    return messageDiv;
+  }
+
   async handleContactSubmit(e) {
     e.preventDefault();
 
     const form = e.target;
     const formData = {
-      name: form.name.value,
-      email: form.email.value,
-      message: form.message.value,
+      name: form.name.value.trim(),
+      email: form.email.value.trim(),
+      message: form.message.value.trim(),
     };
 
     const submitBtn = form.querySelector('button[type="submit"]');
     const originalText = submitBtn.textContent;
-    submitBtn.textContent = "Sending...";
+
+    const messageDiv = this.getMessageElement();
+    
+    messageDiv.className = '';
+    messageDiv.style.cssText = 'margin-top: 1rem;';
+    
+    messageDiv.style.display = 'block';
+    messageDiv.classList.add('sending');
+    messageDiv.innerHTML = 'Sending...';
+    
     submitBtn.disabled = true;
 
     try {
       const result = await EmailService.sendContactEmail(formData);
 
       if (result.success) {
-        alert(
-          result.message ||
-            "Thank you for your message! I will get back to you as soon as possible.",
-        );
+        messageDiv.classList.remove('sending');
+        messageDiv.classList.add('success');
+        
+        messageDiv.innerHTML = `
+          <div class="email-confirmation">
+            <p><strong>${formData.name}</strong></p>
+            <p>${formData.message}</p>
+            <hr>
+            <p>Hi ${formData.name},</p>
+            <p>Thanks for reaching out! I've received your message and will get back to you as soon as possible - usually within 24 hours.</p>
+            <p>Your message:<br>
+            "${formData.message}"</p>
+            <p>Best regards,<br>
+            Aneta<br>
+            Frontend Developer</p>
+          </div>
+        `;
+
         form.reset();
       } else {
-        alert(
-          result.errors
-            ? result.errors.join("\n")
-            : "An error occurred. Please try again.",
-        );
+        messageDiv.classList.remove('sending');
+        messageDiv.classList.add('error');
+        messageDiv.innerHTML = result.errors
+          ? result.errors.join("<br>")
+          : "An error occurred. Please try again.";
       }
     } catch (error) {
-      alert(
-        "A technical error occurred. Please try again later or contact me directly via email.",
-      );
+      messageDiv.classList.remove('sending');
+      messageDiv.classList.add('error');
+      messageDiv.innerHTML = "A technical error occurred. Please try again later.";
     } finally {
       submitBtn.textContent = originalText;
       submitBtn.disabled = false;
     }
+  }
+
+  escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
   }
 }
 

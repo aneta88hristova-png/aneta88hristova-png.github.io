@@ -44,7 +44,6 @@
   flex-direction: column;
   height: 100%;
 }
-
 .project-card:hover {
   transform: translateY(-5px);
   border-color: var(--purple);

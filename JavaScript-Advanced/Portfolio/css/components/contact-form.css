@@ -1,67 +1,160 @@
-.contact-form {
-  max-width: 600px;
-  margin: var(--spacing-xl) auto 0;
-  padding: var(--spacing-lg);
-  background: var(--glass);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-lg);
-  backdrop-filter: blur(10px);
-}
-
-.form-group {
-  margin-bottom: var(--spacing-md);
-}
-
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: var(--spacing-sm);
-  background: rgba(255, 255, 255, 0.1);
-  border: 2px solid transparent;
+#form-message {
+  margin-top: 1rem;
+  padding: 1rem;
   border-radius: var(--radius-md);
-  color: white;
-  font-size: var(--font-size-md);
-  transition: all var(--transition-fast);
   font-family: var(--font-primary);
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: var(--purple);
-  background: rgba(255, 255, 255, 0.15);
-}
-
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.form-group textarea {
-  resize: vertical;
-  min-height: 120px;
-}
-
-.contact-form .btn {
-  width: 100%;
-  padding: var(--spacing-sm) var(--spacing-lg);
-  font-size: var(--font-size-lg);
-  background: linear-gradient(135deg, var(--purple), var(--blue));
-  color: white;
-  border: none;
-  border-radius: var(--radius-full);
-  cursor: pointer;
+  line-height: 1.6;
   transition: all var(--transition-fast);
-  font-weight: 600;
+  display: none;
 }
 
-.contact-form .btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(160, 80, 197, 0.3);
+#form-message[style*="display: block"] {
+  display: block;
 }
 
-.contact-form .btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  transform: none;
+#form-message.sending {
+  background-color: #f0f0f0;
+  color: #212529;
+  border: 1px solid #ddd;
+}
+
+#form-message.success {
+  background-color: #151d26;
+  color: #292121;
+  border: 1px solid #dee2e6;
+}
+
+#form-message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+#form-message hr {
+  border: 0;
+  border-top: 1px solid var(--glass-border);
+  margin: 1rem 0;
+}
+
+#form-message strong {
+  color: var(--blue);
+}
+
+#form-message em {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.9rem;
+}
+
+/* ===== EMAIL CONFIRMATION ===== */
+.email-confirmation {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  margin-top: 0.5rem;
+  font-family: var(--font-primary);
+  line-height: 1.6;
+  color: var(--light);
+}
+
+.email-confirmation hr {
+  border: 0;
+  border-top: 1px solid var(--glass-border);
+  margin: 1rem 0;
+}
+
+.email-confirmation strong {
+  color: var(--blue);
+}
+
+.email-confirmation em {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.9rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media screen and (max-width: 768px) {
+  .contact-info {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+  
+  .contact-item {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .contact-form {
+    margin: var(--spacing-lg) var(--spacing-md) 0;
+    padding: var(--spacing-md);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .contact-section h2 {
+    font-size: 2rem;
+  }
+  
+  .contact-form {
+    padding: var(--spacing-sm);
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: var(--spacing-xs);
+    font-size: var(--font-size-sm);
+  }
+
+  .contact-form .btn {
+    padding: var(--spacing-xs) var(--spacing-md);
+    font-size: var(--font-size-md);
+  }
+
+  #form-message {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .email-confirmation {
+    padding: 1rem;
+  }
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+  .contact-form .btn,
+  .contact-form .btn.sending::after,
+  #form-message,
+  .form-group input,
+  .form-group textarea {
+    transition: none;
+    animation: none;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .contact-form,
+  .form-group input,
+  .form-group textarea,
+  .contact-form .btn {
+    border: 2px solid white;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .contact-form {
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  .form-group input,
+  .form-group textarea {
+    color: white;
+  }
+}
+
+@media print {
+  .contact-form {
+    display: none;
+  }
 }
