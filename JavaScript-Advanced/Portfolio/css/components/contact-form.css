@@ -19,7 +19,7 @@
 }
 
 #form-message.success {
-  background-color: #151d26;
+  background-color: rgba(255, 255, 255, 0.05);
   color: #292121;
   border: 1px solid #dee2e6;
 }
@@ -79,12 +79,12 @@
     align-items: center;
     gap: var(--spacing-sm);
   }
-  
+
   .contact-item {
     width: 100%;
     max-width: 300px;
   }
-  
+
   .contact-form {
     margin: var(--spacing-lg) var(--spacing-md) 0;
     padding: var(--spacing-md);
@@ -95,7 +95,7 @@
   .contact-section h2 {
     font-size: 2rem;
   }
-  
+
   .contact-form {
     padding: var(--spacing-sm);
   }

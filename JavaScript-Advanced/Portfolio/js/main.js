@@ -191,13 +191,13 @@ class Portfolio {
         
         messageDiv.innerHTML = `
           <div class="email-confirmation">
-            <p><strong>${formData.name}</strong></p>
-            <p>${formData.message}</p>
+            <p><strong>${this.escapeHtml(formData.name)}</strong></p>
+            <p>${this.escapeHtml(formData.message)}</p>
             <hr>
-            <p>Hi ${formData.name},</p>
+            <p>Hi ${this.escapeHtml(formData.name)},</p>
             <p>Thanks for reaching out! I've received your message and will get back to you as soon as possible - usually within 24 hours.</p>
             <p>Your message:<br>
-            "${formData.message}"</p>
+            "${this.escapeHtml(formData.message)}"</p>
             <p>Best regards,<br>
             Aneta<br>
             Frontend Developer</p>
@@ -205,17 +205,41 @@ class Portfolio {
         `;
 
         form.reset();
+      
+        setTimeout(() => {
+          messageDiv.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'center' 
+          });
+        }, 100);
+        
       } else {
         messageDiv.classList.remove('sending');
         messageDiv.classList.add('error');
         messageDiv.innerHTML = result.errors
           ? result.errors.join("<br>")
           : "An error occurred. Please try again.";
+      
+        setTimeout(() => {
+          messageDiv.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'center' 
+          });
+        }, 100);
       }
     } catch (error) {
       messageDiv.classList.remove('sending');
       messageDiv.classList.add('error');
       messageDiv.innerHTML = "A technical error occurred. Please try again later.";
+      
+   
+      setTimeout(() => {
+        messageDiv.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'center' 
+        });
+      }, 100);
+      
     } finally {
       submitBtn.textContent = originalText;
       submitBtn.disabled = false;
