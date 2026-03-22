@@ -6,8 +6,8 @@
 
 .contact-section h2 {
   font-family: 'Dancing Script', cursive;
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
-  font-weight: 400;
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: 300;
   background: linear-gradient(135deg, var(--purple), var(--blue));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

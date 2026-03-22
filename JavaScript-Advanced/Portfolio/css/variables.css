@@ -12,30 +12,30 @@
 
   --font-primary: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   --font-display: "Dancing Script", cursive;
-  --font-size-sm: 0.9rem;
+  --font-size-sm: 0.875rem;
   --font-size-md: 1rem;
-  --font-size-lg: 1.2rem;
-  --font-size-xl: 1.7rem;
-  --font-size-xxl: clamp(3.5rem, 8vw, 5rem);
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-xxl: clamp(2rem, 5vw, 3rem);
 
   --spacing-xs: 0.5rem;
-  --spacing-sm: 1rem;
-  --spacing-md: 1.5rem;
-  --spacing-lg: 2rem;
-  --spacing-xl: 3rem;
-  --spacing-xxl: 5rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-xxl: 3rem;
 
-  --radius-sm: 15px;
-  --radius-md: 25px;
-  --radius-lg: 30px;
-  --radius-full: 50px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 40px;
 
   --transition-fast: 0.3s ease;
   --transition-normal: 0.5s ease;
 
-  --shadow-sm: 0 10px 20px rgba(160, 80, 197, 0.2);
-  --shadow-md: 0 15px 30px rgba(160, 80, 197, 0.3);
-  --shadow-lg: -5px 0 30px rgba(0, 0, 0, 0.5);
+  --shadow-sm: 0 5px 15px rgba(160, 80, 197, 0.2);
+  --shadow-md: 0 8px 25px rgba(160, 80, 197, 0.25);
+  --shadow-lg: -5px 0 25px rgba(0, 0, 0, 0.4);
 }
 
 html {
